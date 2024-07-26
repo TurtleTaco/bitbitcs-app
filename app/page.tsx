@@ -1,12 +1,23 @@
+"use client";
+
 import AcmeLogo from "@/app/ui/acme-logo";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
 
+import { Button } from "baseui/button";
+import { useStyletron } from "baseui";
+
 export default function Page() {
+  const [css, theme] = useStyletron();
+
   return (
     <main className="flex min-h-screen flex-col p-6">
+      <div>
+        <Button onClick={() => console.log("hey")}>Hello</Button>
+        <p className={css({ color: theme.colors.accent600 })}>Styled by hook</p>
+      </div>
       <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
         <AcmeLogo />
       </div>
@@ -30,7 +41,6 @@ export default function Page() {
           </Link>
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
           <Image
             src="/hero-desktop.png"
             width={1000}
