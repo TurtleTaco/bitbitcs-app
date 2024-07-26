@@ -6,19 +6,100 @@ import Link from "next/link";
 import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
 
+// base setup
 import { Button } from "baseui/button";
 import { useStyletron } from "baseui";
 
+// base bottom navigator
+import * as React from "react";
+import { styled } from "baseui/styles";
+import { BottomNavigation, NavItem } from "baseui/bottom-navigation";
+import { MessageCard } from "baseui/message-card";
+import { colors } from "baseui/tokens";
+import Calendar from "baseui/icon/calendar";
+import Alert from "baseui/icon/alert";
+import ChevronRight from "baseui/icon/chevron-right";
+import Show from "baseui/icon/show";
+import Search from "baseui/icon/search";
+import Upload from "baseui/icon/upload";
+
+const StyledIphone6 = styled("div", {
+  width: "100%",
+  height: "100vh",
+  border: "1px solid #ECECEC",
+  borderRadius: "12px",
+  position: "relative",
+  overflow: "hidden",
+});
+
 export default function Page() {
   const [css, theme] = useStyletron();
+  const [activeKey, setActiveKey] = React.useState<number>(0);
 
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div>
+    <main className="flex flex-col">
+      <StyledIphone6>
+        <BottomNavigation
+          activeKey={activeKey}
+          onChange={({ activeKey }) => setActiveKey(activeKey)}
+        >
+          <NavItem title="Search" icon={Search}>
+            <h1>Search content</h1>
+          </NavItem>
+
+          <NavItem title="Food" icon={Show}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+              }}
+            >
+              <MessageCard
+                heading="Heading"
+                paragraph="ipsum lorem dopem topo logic hippos bananas and the rest"
+                buttonLabel="Save now"
+                onClick={() => console.log("Saved")}
+                backgroundColor={colors.red200}
+              />
+              <MessageCard
+                paragraph="ipsum lorem dopem topo logic hippos bananas and the rest"
+                buttonLabel="Save now"
+                onClick={() => console.log("Saved")}
+              />
+              <MessageCard
+                heading="Heading"
+                paragraph="ipsum lorem dopem topo logic hippos bananas and the rest"
+                onClick={() => console.log("Saved")}
+                backgroundColor={colors.blue300}
+              />
+            </div>
+          </NavItem>
+
+          <NavItem title="Schedule" icon={Calendar}>
+            <h1>Schedule content</h1>
+          </NavItem>
+
+          <NavItem title="Attention" icon={Alert}>
+            <h1>Attention content</h1>
+          </NavItem>
+
+          <NavItem title="Transit" icon={ChevronRight}>
+            <h1>Transit content</h1>
+          </NavItem>
+
+          <NavItem title="Upload" icon={Upload}>
+            <h1>File Upload</h1>
+          </NavItem>
+        </BottomNavigation>
+      </StyledIphone6>
+
+      {/* <div>
         <Button onClick={() => console.log("hey")}>Hello</Button>
         <p className={css({ color: theme.colors.accent600 })}>Styled by hook</p>
-      </div>
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
+      </div> */}
+
+      {/* <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
         <AcmeLogo />
       </div>
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
@@ -56,7 +137,7 @@ export default function Page() {
             alt="Screenshot of the dashboard project showing mobile version"
           />
         </div>
-      </div>
+      </div> */}
     </main>
   );
 }
