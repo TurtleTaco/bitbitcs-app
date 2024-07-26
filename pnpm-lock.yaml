@@ -29,6 +29,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      email-validator:
+        specifier: ^2.0.4
+        version: 2.0.4
       next:
         specifier: 15.0.0-canary.56
         version: 15.0.0-canary.56(react-dom@19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704))(react@19.0.0-rc-f38c22b244-20240704)
@@ -44,6 +47,9 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-f38c22b244-20240704
         version: 19.0.0-rc-f38c22b244-20240704(react@19.0.0-rc-f38c22b244-20240704)
+      react-icons:
+        specifier: ^5.2.1
+        version: 5.2.1(react@19.0.0-rc-f38c22b244-20240704)
       styletron-engine-atomic:
         specifier: ^1.6.2
         version: 1.6.2
@@ -756,6 +762,10 @@ packages:
   electron-to-chromium@1.4.789:
     resolution: {integrity: sha512-0VbyiaXoT++Fi2vHGo2ThOeS6X3vgRCWrjPeO2FeIAWL6ItiSJ9BqlH8LfCXe3X1IdcG+S0iLoNaxQWhfZoGzQ==}
 
+  email-validator@2.0.4:
+    resolution: {integrity: sha512-gYCwo7kh5S3IDyZPLZf6hSS0MnZT8QmJFqYvbqlDZSbwdZlY6QZWxJ4i/6UhITOJ4XzyI647Bm2MXKCLqnJ4nQ==}
+    engines: {node: '>4.0'}
+
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
 
@@ -1298,6 +1308,11 @@ packages:
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
+
+  react-icons@5.2.1:
+    resolution: {integrity: sha512-zdbW5GstTzXaVKvGSyTaBalt7HSfuK5ovrzlpyiWHAFXndXTdd/1hdDHI4xBM1Mn7YriT6aqESucFl9kEXzrdw==}
+    peerDependencies:
+      react: '*'
 
   react-input-mask@2.0.4:
     resolution: {integrity: sha512-1hwzMr/aO9tXfiroiVCx5EtKohKwLk/NT8QlJXHQ4N+yJJFyUuMT+zfTpLBwX/lK3PkuMlievIffncpMZ3HGRQ==}
@@ -2341,6 +2356,8 @@ snapshots:
 
   electron-to-chromium@1.4.789: {}
 
+  email-validator@2.0.4: {}
+
   emoji-regex@8.0.0: {}
 
   emoji-regex@9.2.2: {}
@@ -2837,6 +2854,10 @@ snapshots:
       '@types/react': 18.3.3
 
   react-hook-form@7.52.1(react@19.0.0-rc-f38c22b244-20240704):
+    dependencies:
+      react: 19.0.0-rc-f38c22b244-20240704
+
+  react-icons@5.2.1(react@19.0.0-rc-f38c22b244-20240704):
     dependencies:
       react: 19.0.0-rc-f38c22b244-20240704
 

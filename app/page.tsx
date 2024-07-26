@@ -17,13 +17,18 @@ import { BottomNavigation, NavItem } from "baseui/bottom-navigation";
 import { MessageCard } from "baseui/message-card";
 import { colors } from "baseui/tokens";
 import Calendar from "baseui/icon/calendar";
-import Alert from "baseui/icon/alert";
-import ChevronRight from "baseui/icon/chevron-right";
 import Show from "baseui/icon/show";
 import Search from "baseui/icon/search";
-import Upload from "baseui/icon/upload";
+import CircleCheckFilled from "baseui/icon/circle-check-filled";
+import Menu from "baseui/icon/menu";
 
-const StyledIphone6 = styled("div", {
+// react icon
+import { FaHome } from "react-icons/fa";
+
+// UI components
+import AccountManage from "@/app/ui/account/account-manage";
+
+const BottomNavigationStyle = styled("div", {
   width: "100%",
   height: "100vh",
   border: "1px solid #ECECEC",
@@ -34,20 +39,16 @@ const StyledIphone6 = styled("div", {
 
 export default function Page() {
   const [css, theme] = useStyletron();
-  const [activeKey, setActiveKey] = React.useState<number>(0);
+  const [activeKey, setActiveKey] = React.useState<number>(3);
 
   return (
     <main className="flex flex-col">
-      <StyledIphone6>
+      {/* <BottomNavigationStyle>
         <BottomNavigation
           activeKey={activeKey}
           onChange={({ activeKey }) => setActiveKey(activeKey)}
         >
-          <NavItem title="Search" icon={Search}>
-            <h1>Search content</h1>
-          </NavItem>
-
-          <NavItem title="Food" icon={Show}>
+          <NavItem title="Home" icon={Menu}>
             <div
               style={{
                 display: "flex",
@@ -80,19 +81,15 @@ export default function Page() {
             <h1>Schedule content</h1>
           </NavItem>
 
-          <NavItem title="Attention" icon={Alert}>
-            <h1>Attention content</h1>
+          <NavItem title="Search" icon={Search}>
+            <h1>Search content</h1>
           </NavItem>
 
-          <NavItem title="Transit" icon={ChevronRight}>
-            <h1>Transit content</h1>
-          </NavItem>
-
-          <NavItem title="Upload" icon={Upload}>
-            <h1>File Upload</h1>
+          <NavItem title="Account" icon={CircleCheckFilled}>
+            <AccountManage />
           </NavItem>
         </BottomNavigation>
-      </StyledIphone6>
+      </BottomNavigationStyle> */}
 
       {/* <div>
         <Button onClick={() => console.log("hey")}>Hello</Button>

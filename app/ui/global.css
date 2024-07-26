@@ -16,3 +16,252 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+body {
+  font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-feature-settings: "ss01";
+  font-variation-settings: normal;
+  -webkit-font-smoothing: antialiased;
+  /* background-color: rgb(244,244,241); */
+  color: #333;
+  letter-spacing: -.015em;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  unicode-bidi: isolate;
+}
+
+h1 {
+  font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.125rem;
+  font-feature-settings: "ss01";
+  line-height: 1.75rem;
+  color: rgb(41, 38, 27);
+}
+
+h2 {
+  font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1rem;
+  font-feature-settings: "ss01";
+  line-height: 1.65rem;
+  color: rgb(41, 38, 27);
+  display: block;
+  font-weight: 700;
+}
+
+h3 {
+  display: block;
+  font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-feature-settings: "ss01";
+  font-size: 1rem;
+  line-height: 1.65rem;
+  color: rgb(41, 38, 27);
+  display: block;
+  font-weight: 700;
+  font-variation-settings: normal;
+  letter-spacing: -.015em;
+  margin-block-end: block;
+}
+
+p {
+  display: block;
+  line-height: 1.65rem;
+  margin-block-start: -0.25rem;
+  margin-top: 0rem;
+  unicode-bidi: isolate;
+}
+
+ul {
+  display: block;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  line-height: 1.65rem;
+  margin-block-start: -0.25rem;
+  margin-top: 0rem;
+  unicode-bidi: isolate;
+  padding-left: 2rem;
+}
+
+ol {
+  display: block;
+  list-style-position: outside;
+  line-height: 1.65rem;
+  margin-block-start: -0.25rem;
+  margin-top: 0rem;
+  unicode-bidi: isolate;
+  padding-left: 2rem;
+  counter-reset: item;
+}
+
+ol li {
+  display: block;
+  position: relative;
+}
+
+ol li::before {
+  content: counter(item) ".";
+  counter-increment: item;
+  position: absolute;
+  left: -2rem;
+  width: 1.5rem;
+  text-align: right;
+}
+
+li {
+  font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  white-space: normal;
+  display: list-item;
+  text-align: -webkit-match-parent;
+  unicode-bidi: isolate;
+}
+
+ul li {
+  font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  margin: 5px 0;
+  font-size: 16px;
+  line-height: 1.65rem;
+}
+
+ul li::before {
+  font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  content: '•';
+  color: #444;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  font-size: 1.25rem;
+  line-height: 1rem;
+}
+
+/* Add these new rules */
+ol > li > ul {
+  padding-left: 1.25rem;
+}
+
+ol > li > ul > li::before {
+  margin-left: 0;
+}
+
+
+blockquote {
+  font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  margin: 15px 0;
+  padding-left: 16px;
+  border-left: 3.75px solid rgba(112, 107, 87, 0.5);
+}
+
+blockquote p {
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.65rem;
+  white-space-collapse: preserve;
+}
+
+pre {
+  background: rgb(40, 44, 52);
+  color: rgb(171, 178, 191);
+  text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+  font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+  padding: 1em;
+  margin: 0.5em 0px;
+  overflow: auto;
+  border-radius: 0.3em;
+}
+
+pre code {
+  background: rgb(40, 44, 52);
+  color: rgb(171, 178, 191);
+  text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+  font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+}
+
+
+.table-container {
+  margin: 20px 0;
+}
+
+table {
+  font-family: "__styreneB_5d855b", "__styreneB_Fallback_5d855b", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 0.875rem;
+  letter-spacing: -.015rem;
+  line-height: 1.65rem;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  white-space: nowrap; /* Prevent text from wrapping within cells */
+  color: rgb(41, 38, 27);
+  background-color: rgb(245, 244, 239);
+  border-bottom-color: rgba(112, 107, 87, 0.5);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgba(112, 107, 87, 0.5);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgba(112, 107, 87, 0.5);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgba(112, 107, 87, 0.5);
+  border-top-style: solid;
+  border-top-width: 0px;
+  outline-color: rgb(186, 91, 56);
+  overflow-x: auto; /* Add horizontal scroll if the table is too wide */
+  display: block; /* Make the table block-level for overflow to work */
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(244,244,241);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: rgba(240, 238, 231);
+}
+
+th {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-align: center;
+  border: 1px solid #ddd;
+  background-color: rgba(244,244,241);
+  font-weight: bold;
+}
+
+td {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-align: center;
+  border: 1px solid #ddd;
+  white-space: normal; /* Allow text to wrap within cells */
+  word-wrap: break-word; /* Break words if necessary */
+}
+
+hr {
+  border: 0;
+  height: 0.625px;
+  background: #ccc;
+  margin: 20px 0;
+}
+
+p strong {
+  color: #444;
+}
