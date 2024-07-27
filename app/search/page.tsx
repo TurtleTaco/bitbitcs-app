@@ -16,6 +16,16 @@ import { styled } from "styletron-react";
 import { Search, ChevronRight } from "baseui/icon";
 import { Tile, TILE_KIND, ALIGNMENT, StyledParagraph } from "baseui/tile";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import {
+  RiShieldKeyholeLine,
+  RiDatabase2Line,
+  RiFlowChart,
+  RiLockLine,
+  RiAlarmWarningLine,
+  RiPercentLine,
+  RiSearchLine,
+  RiArrowRightSLine,
+} from "react-icons/ri";
 
 const SearchContainer = styled("div", {
   padding: "10px",
@@ -28,18 +38,27 @@ export default function Page() {
   const [selectedTiles, setSelectedTiles] = React.useState<number[]>([]);
 
   const modules = [
-    { id: 1, title: "Application Security", chapter_cnt: 8 },
-    { id: 2, title: "Big Data Handling", chapter_cnt: 4 },
-    { id: 3, title: "Data Modeling", chapter_cnt: 5 },
-    { id: 4, title: "Network Security", chapter_cnt: 6 },
+    {
+      id: 1,
+      title: "Application Security",
+      chapter_cnt: 8,
+      icon: RiShieldKeyholeLine,
+    },
+    {
+      id: 2,
+      title: "Big Data Handling",
+      chapter_cnt: 4,
+      icon: RiDatabase2Line,
+    },
+    { id: 3, title: "Data Modeling", chapter_cnt: 5, icon: RiFlowChart },
+    { id: 4, title: "Network Security", chapter_cnt: 6, icon: RiLockLine },
     {
       id: 5,
       title: "Logging, Monitoring, and Alerting Systems",
       chapter_cnt: 6,
+      icon: RiAlarmWarningLine,
     },
-    { id: 6, title: "Probability Theory", chapter_cnt: 6 },
-    { id: 7, title: "Probability Theory", chapter_cnt: 6 },
-    { id: 8, title: "Probability Theory", chapter_cnt: 6 },
+    { id: 6, title: "Probability Theory", chapter_cnt: 6, icon: RiPercentLine },
   ];
 
   const toggleTileSelection = (id: number) => {
@@ -95,7 +114,7 @@ export default function Page() {
                 : TILE_KIND.selection
             }
             label={module.title}
-            leadingContent={() => <Search size={36} />}
+            leadingContent={() => <module.icon size={36} />}
             trailingContent={() => <ChevronRight size={36} />}
             headerAlignment={ALIGNMENT.left}
             bodyAlignment={ALIGNMENT.left}
