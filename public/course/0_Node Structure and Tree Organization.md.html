@@ -1,0 +1,395 @@
+
+<!-- 1.65rem -> 26.4px -->
+<style>
+  body {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-feature-settings: "ss01";
+    font-variation-settings: normal;
+    -webkit-font-smoothing: antialiased;
+    background-color: rgb(244,244,241);
+    color: #333;
+    padding-top: .875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1.125rem;
+    letter-spacing: -.015em;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    unicode-bidi: isolate;
+    max-width: 100vw;
+  }
+
+  h1 {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 1.125rem;
+    font-feature-settings: "ss01";
+    line-height: 1.75rem;
+    color: rgb(41, 38, 27);
+    font-weight: 700;
+  }
+
+  h2 {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 1rem;
+    font-feature-settings: "ss01";
+    line-height: 1.65rem;
+    color: rgb(41, 38, 27);
+    display: block;
+    font-weight: 700;
+  }
+
+  h3 {
+    display: block;
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-feature-settings: "ss01";
+    font-size: 1rem;
+    line-height: 1.65rem;
+    color: rgb(41, 38, 27);
+    display: block;
+    font-weight: 700;
+    font-variation-settings: normal;
+    letter-spacing: -.015em;
+    margin-block-end: block;
+  }
+
+  p {
+    display: block;
+    line-height: 1.65rem;
+    margin-block-start: -0.25rem;
+    margin-top: 0rem;
+    unicode-bidi: isolate;
+  }
+
+  ul {
+    display: block;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    /* Remove the default bullet */
+    line-height: 1.65rem;
+    margin-block-start: -0.25rem;
+    margin-top: 0rem;
+    unicode-bidi: isolate;
+    padding-left: 1.65rem;
+  }
+
+  ol {
+    display: block;
+    /* Remove the default bullet */
+    line-height: 1.65rem;
+    margin-block-start: -0.25rem;
+    margin-top: 0rem;
+    unicode-bidi: isolate;
+    padding-left: 1.65rem;
+  }
+
+  li {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    white-space: normal;
+    display: list-item;
+    text-align: -webkit-match-parent;
+    unicode-bidi: isolate;
+  }
+
+  ul li {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    margin: 5px 0;
+    font-size: 16px;
+    line-height: 1.65rem;
+  }
+
+  ul li::before {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    content: '•';
+    /* Custom bullet */
+    color: #444;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    font-size: 1.25rem;
+    /* Adjust the size of the bullet */
+    line-height: 1rem;
+    /* Adjust the line height if needed */
+  }
+
+
+  blockquote {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    margin: 15px 0;
+    padding-left: 16px;
+    border-left: 3.75px solid rgba(112, 107, 87, 0.5);
+  }
+
+  blockquote p {
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.65rem;
+    white-space-collapse: preserve;
+  }
+
+  pre {
+    background: rgb(40, 44, 52);
+    color: rgb(171, 178, 191);
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+    font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 2;
+    hyphens: none;
+    padding: 1em;
+    margin: 0.5em 0px;
+    overflow: auto;
+    border-radius: 0.3em;
+  }
+
+  pre code {
+    background: rgb(40, 44, 52);
+    color: rgb(171, 178, 191);
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+    font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 2;
+    hyphens: none;
+  }
+
+
+  .table-container {
+    margin: 20px 0;
+  }
+  
+  table {
+    font-family: "__styreneB_5d855b", "__styreneB_Fallback_5d855b", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 0.875rem;
+    letter-spacing: -.015rem;
+    line-height: 1.65rem;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    white-space: nowrap; /* Prevent text from wrapping within cells */
+    color: rgb(41, 38, 27);
+    background-color: rgb(245, 244, 239);
+    border-bottom-color: rgba(112, 107, 87, 0.5);
+    border-bottom-style: solid;
+    border-bottom-width: 0px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgba(112, 107, 87, 0.5);
+    border-left-style: solid;
+    border-left-width: 0px;
+    border-right-color: rgba(112, 107, 87, 0.5);
+    border-right-style: solid;
+    border-right-width: 0px;
+    border-top-color: rgba(112, 107, 87, 0.5);
+    border-top-style: solid;
+    border-top-width: 0px;
+    outline-color: rgb(186, 91, 56);
+    overflow-x: auto; /* Add horizontal scroll if the table is too wide */
+    display: block; /* Make the table block-level for overflow to work */
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: rgba(244,244,241);
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: rgba(240, 238, 231);
+  }
+
+  th {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    background-color: rgba(244,244,241);
+    font-weight: bold;
+  }
+
+  td {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: normal; /* Allow text to wrap within cells */
+    word-wrap: break-word; /* Break words if necessary */
+  }
+
+  hr {
+    border: 0;
+    height: 0.625px;
+    background: #ccc;
+    margin: 20px 0;
+  }
+
+  p strong {
+    color: #444;
+  }
+</style>
+<hr>
+<p><strong>B-trees</strong> fundamentally differ from <strong>binary search trees</strong> in their node structure and branching factor:</p>
+<ul>
+<li>B-tree nodes can contain multiple keys and child pointers</li>
+<li>Binary search tree nodes have at most 1 key and 2 child pointers</li>
+</ul>
+<p>This key difference enables B-trees to have a much higher <strong>branching factor</strong> or <strong>fan-out</strong>, allowing them to store more keys per node and reduce overall tree height compared to binary search trees.</p>
+<hr>
+<p>The multi-way branching in B-trees leads to several important implications:</p>
+<ol>
+<li><strong>Shallower depth</strong>: With more keys per node, B-trees can store the same amount of data in fewer levels compared to binary search trees.</li>
+<li><strong>Improved search efficiency</strong>: The shallower depth results in fewer node accesses during search operations, potentially improving performance, especially for external memory data structures.</li>
+<li><strong>Better space utilization</strong>: B-tree nodes can be designed to match disk block sizes, optimizing I/O operations and storage efficiency.</li>
+</ol>
+<h1>🌳 B-tree vs Binary Search Tree Comparison 🔍</h1>
+<p><strong>Scenario</strong>: Storing 1 million sorted integers</p>
+<h2>1. Binary Search Tree (BST)</h2>
+<ul>
+<li>📏 Depth: ~20 levels (log₂ 1,000,000)</li>
+<li>🧬 Node structure: 1 key, 2 child pointers</li>
+</ul>
+<h2>2. B-tree (order 1000)</h2>
+<ul>
+<li>📏 Depth: ~2 levels (log₁₀₀₀ 1,000,000)</li>
+<li>🧬 Node structure: Up to 999 keys, 1000 child pointers</li>
+</ul>
+<h3>🔎 Search Operation Comparison</h3>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>Tree Type</th>
+<th>Node Accesses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BST</td>
+<td>Up to 20</td>
+</tr>
+<tr>
+<td>B-tree</td>
+<td>2-3</td>
+</tr>
+</tbody>
+</table></div>
+<h3>💽 Disk-based Scenario (4KB blocks)</h3>
+<ul>
+<li>BST: 1 node/block, <strong>20 I/O operations</strong></li>
+<li>B-tree: 1 node/block, <strong>2-3 I/O operations</strong></li>
+</ul>
+<p>⭐ <strong>Result</strong>: B-tree significantly reduces depth and improves search efficiency, especially for external memory structures.</p>
+<svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="-8 -8 311.8828125 355.5" style="max-width: 311.8828125px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-0"><style>#mermaid-0{font-family:arial,sans-serif;font-size:16px;fill:#333;}#mermaid-0 .error-icon{fill:#552222;}#mermaid-0 .error-text{fill:#552222;stroke:#552222;}#mermaid-0 .edge-thickness-normal{stroke-width:2px;}#mermaid-0 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-0 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-0 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-0 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-0 .marker{fill:#333333;stroke:#333333;}#mermaid-0 .marker.cross{stroke:#333333;}#mermaid-0 svg{font-family:arial,sans-serif;font-size:16px;}#mermaid-0 .label{font-family:arial,sans-serif;color:#333;}#mermaid-0 .cluster-label text{fill:#333;}#mermaid-0 .cluster-label span,#mermaid-0 p{color:#333;}#mermaid-0 .label text,#mermaid-0 span,#mermaid-0 p{fill:#333;color:#333;}#mermaid-0 .node rect,#mermaid-0 .node circle,#mermaid-0 .node ellipse,#mermaid-0 .node polygon,#mermaid-0 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-0 .flowchart-label text{text-anchor:middle;}#mermaid-0 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-0 .node .label{text-align:center;}#mermaid-0 .node.clickable{cursor:pointer;}#mermaid-0 .arrowheadPath{fill:#333333;}#mermaid-0 .edgePath .path{stroke:#333333;stroke-width:2.0px;}#mermaid-0 .flowchart-link{stroke:#333333;fill:none;}#mermaid-0 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-0 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-0 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#mermaid-0 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#mermaid-0 .cluster text{fill:#333;}#mermaid-0 .cluster span,#mermaid-0 p{color:#333;}#mermaid-0 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-0 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-0 :root{--mermaid-font-family:arial,sans-serif;}</style><g><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="6" viewBox="0 0 10 10" class="marker flowchart" id="mermaid-0_flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart" id="mermaid-0_flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart" id="mermaid-0_flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart" id="mermaid-0_flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart" id="mermaid-0_flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart" id="mermaid-0_flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-B" id="L-A-B-0" d="M75.977,52L75.977,56.167C75.977,60.333,75.977,68.667,75.977,77.658C75.977,86.65,75.977,96.3,75.977,101.125L75.977,105.95"></path><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-B LE-C" id="L-B-C-0" d="M75.977,144.75L75.977,150.458C75.977,156.167,75.977,167.583,75.977,178.117C75.977,188.65,75.977,198.3,75.977,203.125L75.977,207.95"></path><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-C LE-D" id="L-C-D-0" d="M75.977,246.75L75.977,252.458C75.977,258.167,75.977,269.583,75.977,278.575C75.977,287.567,75.977,294.133,75.977,297.417L75.977,300.7"></path><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-E LE-F" id="L-E-F-0" d="M242.145,52L242.145,56.167C242.145,60.333,242.145,68.667,242.145,76.117C242.145,83.567,242.145,90.133,242.145,93.417L242.145,96.7"></path><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-F LE-G" id="L-F-G-0" d="M242.145,154L242.145,158.167C242.145,162.333,242.145,170.667,242.145,178.117C242.145,185.567,242.145,192.133,242.145,195.417L242.145,198.7"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(75.9765625, 26)" data-id="A" data-node="true" id="flowchart-A-0" class="node default default flowchart-label"><rect height="52" width="151.953125" y="-26" x="-75.9765625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-68.4765625, -18.5)" style="" class="label"><rect></rect><foreignObject height="37" width="136.953125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Binary Search Tree<br></br>Depth ~20</span></div></foreignObject></g></g><g transform="translate(75.9765625, 128)" data-id="B" data-node="true" id="flowchart-B-1" class="node default default flowchart-label"><rect height="33.5" width="28.3359375" y="-16.75" x="-14.16796875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-6.66796875, -9.25)" style="" class="label"><rect></rect><foreignObject height="18.5" width="13.3359375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">...</span></div></foreignObject></g></g><g transform="translate(75.9765625, 230)" data-id="C" data-node="true" id="flowchart-C-3" class="node default default flowchart-label"><rect height="33.5" width="28.3359375" y="-16.75" x="-14.16796875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-6.66796875, -9.25)" style="" class="label"><rect></rect><foreignObject height="18.5" width="13.3359375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">...</span></div></foreignObject></g></g><g transform="translate(75.9765625, 322.75)" data-id="D" data-node="true" id="flowchart-D-5" class="node default default flowchart-label"><rect height="33.5" width="46.140625" y="-16.75" x="-23.0703125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-15.5703125, -9.25)" style="" class="label"><rect></rect><foreignObject height="18.5" width="31.140625"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Leaf</span></div></foreignObject></g></g><g transform="translate(242.14453125, 26)" data-id="E" data-node="true" id="flowchart-E-6" class="node default default flowchart-label"><rect height="52" width="80.3828125" y="-26" x="-40.19140625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-32.69140625, -18.5)" style="" class="label"><rect></rect><foreignObject height="37" width="65.3828125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">B-tree<br></br>Depth ~2</span></div></foreignObject></g></g><g transform="translate(242.14453125, 128)" data-id="F" data-node="true" id="flowchart-F-7" class="node default default flowchart-label"><rect height="52" width="107.4765625" y="-26" x="-53.73828125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-46.23828125, -18.5)" style="" class="label"><rect></rect><foreignObject height="37" width="92.4765625"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Node with<br></br>multiple keys</span></div></foreignObject></g></g><g transform="translate(242.14453125, 230)" data-id="G" data-node="true" id="flowchart-G-9" class="node default default flowchart-label"><rect height="52" width="107.4765625" y="-26" x="-53.73828125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-46.23828125, -18.5)" style="" class="label"><rect></rect><foreignObject height="37" width="92.4765625"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Leaf with<br></br>multiple keys</span></div></foreignObject></g></g></g></g></g></svg>
+<hr>
+<p><strong>Varying key limits</strong> in B-tree nodes refers to adjusting the minimum and maximum number of keys allowed in each node. This flexibility affects several aspects of the tree's structure and operations:</p>
+<ul>
+<li><strong>Minimum fill factor</strong>: Defines the lowest acceptable key count per node</li>
+<li><strong>Maximum key count</strong>: Sets the upper limit for keys in a node</li>
+<li><strong>Node splitting and merging thresholds</strong>: Determine when structural changes occur</li>
+</ul>
+<h1>🔢 B-tree with Different Key Limits</h1>
+<h2>📊 B-tree of order 5 (max 4 keys per node)</h2>
+<ol>
+<li><strong>Minimum fill factor</strong>: 2 keys (50%)</p>
+<ul>
+<li>Ensures balanced tree structure</li>
+<li>Prevents excessive splitting/merging</li>
+</ul>
+</li>
+<li><strong>Maximum key count</strong>: 4 keys</p>
+<ul>
+<li>Limits node size for efficient operations</li>
+</ul>
+</li>
+<li><strong>Node splitting</strong> (5 keys):</p>
+<pre><code>[1,2] | 3 | [4,5]
+  ↑     ↑     ↑
+Left   Up   Right
+</code></pre>
+<p>Middle key moves up to parent</li>
+<li><strong>Node merging</strong> (1 key):</p>
+<ul>
+<li>Merge with sibling if possible</li>
+<li>Adjust parent node</li>
+</ul>
+</li>
+</ol>
+<h2>🔄 Impact of Key Limits</h2>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Higher</th>
+<th>Lower</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Min fill</td>
+<td>More balanced, less space-efficient</td>
+<td>More space-efficient, potentially less balanced</td>
+</tr>
+<tr>
+<td>Max keys</td>
+<td>Reduced tree depth, larger nodes</td>
+<td>Increased tree depth, smaller nodes</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>⚠️ Choosing the right key limits is crucial for optimal B-tree performance!</p>
+</blockquote>
+<hr>
+<p>The choice of key limits has profound effects on B-tree characteristics:</p>
+<ol>
+<li><strong>Tree height</strong>: Larger key counts per node generally lead to shorter trees, affecting traversal times.</li>
+<li><strong>Node utilization</strong>: Higher minimum fill factors ensure better space efficiency but may increase the frequency of node splits and merges.</li>
+<li><strong>Operation complexity</strong>: The number of keys affects the time complexity of insert, delete, and search operations within individual nodes.</li>
+</ol>
+<hr>
+<p>When designing B-tree implementations, consider these trade-offs:</p>
+<ul>
+<li><strong>Memory hierarchy alignment</strong>: Aligning node sizes with cache lines or disk blocks can significantly impact performance.</li>
+<li><strong>Workload characteristics</strong>: Read-heavy vs. write-heavy workloads may benefit from different key limit choices.</li>
+<li><strong>Concurrency considerations</strong>: Larger nodes might increase contention in multi-threaded environments.</li>
+</ul>
+<p>Carefully analyze your specific use case to determine the optimal balance between node size, tree depth, and operation efficiency.</p>
+<h1>💾 B-tree Node Size Trade-offs in Database Indexing</h1>
+<h2>🔍 Scenario: Implementing a database index</h2>
+<h3>1. Small Node Size (4KB)</h3>
+<p>✅ Aligns with typical disk block size<br />➕ Pros: Efficient I/O, good for random reads<br />➖ Cons: More levels, higher tree traversal cost</p>
+<h3>2. Large Node Size (64KB)</h3>
+<p>✅ Spans multiple disk blocks<br />➕ Pros: Shallower tree, fewer node accesses<br />➖ Cons: More data read per access, potential waste</p>
+<h2>📊 Use Case Comparison</h2>
+<pre><code>┌─────────────────────┬────────────────┬────────────────┐
+│     Workload        │   Small Nodes  │   Large Nodes  │
+├─────────────────────┼────────────────┼────────────────┤
+│ a. Read-heavy       │       ⭐        │      ⭐⭐⭐     │
+│ b. Write-heavy      │      ⭐⭐⭐     │       ⭐        │
+│ c. Multi-threaded   │      ⭐⭐⭐     │       ⭐        │
+└─────────────────────┴────────────────┴────────────────┘
+</code></pre>
+<h2>🖥️ Memory Hierarchy Consideration</h2>
+<ul>
+<li>L1 Cache Line: 64 bytes</li>
+<li>L2 Cache Line: 128 bytes</li>
+<li>Small nodes may fit entirely in cache lines</li>
+</ul>
+<h2>🎯 Optimal Choice</h2>
+<p><strong>ANALYZE</strong> workload characteristics and hardware specs to balance between:</p>
+<ol>
+<li>Node size</li>
+<li>Tree depth</li>
+<li>Operation efficiency</li>
+</ol>
+<blockquote>
+<p>💡 TIP: The best node size depends on your specific use case and hardware!</p>
+</blockquote>

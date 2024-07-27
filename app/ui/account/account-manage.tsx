@@ -16,18 +16,23 @@ import { MdFeedback } from "react-icons/md";
 import { MdPolicy } from "react-icons/md";
 import { MdPrivacyTip } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { styled } from "styletron-react";
+
+const ProfileContainer = styled("div", {
+  padding: "10px",
+});
 
 export default function AccountManage() {
   const router = useRouter();
 
   return (
-    <div className="pt-10">
+    <ProfileContainer>
       <ListHeading heading="Account" maxLines={1} />
       <ListItem
         artwork={(props) => <MdManageAccounts />}
         artworkSize={ARTWORK_SIZES.LARGE}
         endEnhancer={() => (
-          <Link href="/account" passHref>
+          <Link href="/profile/account" passHref>
             <Button size={SIZE.compact} kind={KIND.tertiary}>
               <MdKeyboardArrowRight />
             </Button>
@@ -93,6 +98,6 @@ export default function AccountManage() {
       >
         <ListItemLabel>Privacy Policy</ListItemLabel>
       </ListItem>
-    </div>
+    </ProfileContainer>
   );
 }

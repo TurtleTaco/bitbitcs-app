@@ -35,6 +35,8 @@ function Negative() {
 }
 
 export default function Page() {
+  const userName = "Lin Sun";
+
   const router = useRouter();
 
   const [value, setValue] = React.useState("zac@gmail.com");
@@ -53,7 +55,7 @@ export default function Page() {
   return (
     <div>
       <div className="flex justify-center pt-10">
-        <Avatar name="Jane Doe" size="scale1600" />
+        <Avatar name={userName} size="scale1600" />
       </div>
 
       <div className="pt-2 pr-2 pl-2">
@@ -72,7 +74,7 @@ export default function Page() {
         />
         <div className="p-4">
           <FormControl label={() => "Name"}>
-            <Input value={"Lin Sun"} />
+            <Input value={userName} />
           </FormControl>
           <FormControl
             label="Your email"

@@ -1,0 +1,397 @@
+
+<!-- 1.65rem -> 26.4px -->
+<style>
+  body {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-feature-settings: "ss01";
+    font-variation-settings: normal;
+    -webkit-font-smoothing: antialiased;
+    background-color: rgb(244,244,241);
+    color: #333;
+    padding-top: .875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1.125rem;
+    letter-spacing: -.015em;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    unicode-bidi: isolate;
+    max-width: 100vw;
+  }
+
+  h1 {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 1.125rem;
+    font-feature-settings: "ss01";
+    line-height: 1.75rem;
+    color: rgb(41, 38, 27);
+  }
+
+  h2 {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 1rem;
+    font-feature-settings: "ss01";
+    line-height: 1.65rem;
+    color: rgb(41, 38, 27);
+    display: block;
+    font-weight: 700;
+  }
+
+  h3 {
+    display: block;
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-feature-settings: "ss01";
+    font-size: 1rem;
+    line-height: 1.65rem;
+    color: rgb(41, 38, 27);
+    display: block;
+    font-weight: 700;
+    font-variation-settings: normal;
+    letter-spacing: -.015em;
+    margin-block-end: block;
+  }
+
+  p {
+    display: block;
+    line-height: 1.65rem;
+    margin-block-start: -0.25rem;
+    margin-top: 0rem;
+    unicode-bidi: isolate;
+  }
+
+  ul {
+    display: block;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    /* Remove the default bullet */
+    line-height: 1.65rem;
+    margin-block-start: -0.25rem;
+    margin-top: 0rem;
+    unicode-bidi: isolate;
+    padding-left: 1.65rem;
+  }
+
+  ol {
+    display: block;
+    /* Remove the default bullet */
+    line-height: 1.65rem;
+    margin-block-start: -0.25rem;
+    margin-top: 0rem;
+    unicode-bidi: isolate;
+    padding-left: 1.65rem;
+  }
+
+  li {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    white-space: normal;
+    display: list-item;
+    text-align: -webkit-match-parent;
+    unicode-bidi: isolate;
+  }
+
+  ul li {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    margin: 5px 0;
+    font-size: 16px;
+    line-height: 1.65rem;
+  }
+
+  ul li::before {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    content: '•';
+    /* Custom bullet */
+    color: #444;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    font-size: 1.25rem;
+    /* Adjust the size of the bullet */
+    line-height: 1rem;
+    /* Adjust the line height if needed */
+  }
+
+
+  blockquote {
+    font-family: "__tiempos_b6f14e", "__tiempos_Fallback_b6f14e", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    margin: 15px 0;
+    padding-left: 16px;
+    border-left: 3.75px solid rgba(112, 107, 87, 0.5);
+  }
+
+  blockquote p {
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.65rem;
+    white-space-collapse: preserve;
+  }
+
+  pre {
+    background: rgb(40, 44, 52);
+    color: rgb(171, 178, 191);
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+    font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 2;
+    hyphens: none;
+    padding: 1em;
+    margin: 0.5em 0px;
+    overflow: auto;
+    border-radius: 0.3em;
+  }
+
+  pre code {
+    background: rgb(40, 44, 52);
+    color: rgb(171, 178, 191);
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+    font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 2;
+    hyphens: none;
+  }
+
+
+  .table-container {
+    margin: 20px 0;
+  }
+  
+  table {
+    font-family: "__styreneB_5d855b", "__styreneB_Fallback_5d855b", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 0.875rem;
+    letter-spacing: -.015rem;
+    line-height: 1.65rem;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    white-space: nowrap; /* Prevent text from wrapping within cells */
+    color: rgb(41, 38, 27);
+    background-color: rgb(245, 244, 239);
+    border-bottom-color: rgba(112, 107, 87, 0.5);
+    border-bottom-style: solid;
+    border-bottom-width: 0px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgba(112, 107, 87, 0.5);
+    border-left-style: solid;
+    border-left-width: 0px;
+    border-right-color: rgba(112, 107, 87, 0.5);
+    border-right-style: solid;
+    border-right-width: 0px;
+    border-top-color: rgba(112, 107, 87, 0.5);
+    border-top-style: solid;
+    border-top-width: 0px;
+    outline-color: rgb(186, 91, 56);
+    overflow-x: auto; /* Add horizontal scroll if the table is too wide */
+    display: block; /* Make the table block-level for overflow to work */
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: rgba(244,244,241);
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: rgba(240, 238, 231);
+  }
+
+  th {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    background-color: rgba(244,244,241);
+    font-weight: bold;
+  }
+
+  td {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: normal; /* Allow text to wrap within cells */
+    word-wrap: break-word; /* Break words if necessary */
+  }
+
+  hr {
+    border: 0;
+    height: 0.625px;
+    background: #ccc;
+    margin: 20px 0;
+  }
+
+  p strong {
+    color: #444;
+  }
+</style>
+<hr>
+<p>The distribution of keys between <strong>internal nodes</strong> and <strong>leaf nodes</strong> in B-trees significantly impacts the <strong>theoretical complexity</strong> of various tree operations. This distribution is carefully designed to optimize both search and range query performance while maintaining efficient insertion and deletion operations.</p>
+<ul>
+<li><strong>Internal nodes</strong>: Contain keys and pointers to child nodes, facilitating efficient traversal</li>
+<li><strong>Leaf nodes</strong>: Store actual data or references to data, optimizing range queries</li>
+</ul>
+<p>This structure allows B-trees to achieve a balance between depth reduction and efficient key comparisons, resulting in logarithmic time complexity for most operations.</p>
+<hr>
+<p>The key distribution strategy in B-trees affects the <strong>time complexity</strong> of operations as follows:</p>
+<ol>
+<li><strong>Search</strong>: O(log n) - The multi-way branching reduces tree height, minimizing the number of node accesses.</li>
+<li><strong>Insert</strong>: O(log n) - New keys are added to leaf nodes, with occasional splits propagating upwards.</li>
+<li><strong>Delete</strong>: O(log n) - Keys are removed from leaf nodes, with potential merges or redistributions.</li>
+<li><strong>Range queries</strong>: O(log n + k) - Where k is the number of elements in the range, benefiting from sequential access in leaf nodes.</li>
+</ol>
+<p>This distribution allows B-trees to maintain excellent performance even as the data size grows, making them ideal for large-scale storage systems and databases.</p>
+<h1>🌳 B-tree Operations (Order 3) 🔍</h1>
+<h2>Initial B-tree:</h2>
+<pre><code>     [10, 20]
+    /    |    \
+[5] [15, 18] [25, 30]
+</code></pre>
+<ol>
+<li><strong>Search for 18</strong>: 🔎 O(log n)</p>
+<ul>
+<li>Compare with 10, 20</li>
+<li>Go to middle child</li>
+<li>Find 18
+➤ Total comparisons: 3</li>
+</ul>
+</li>
+<li><strong>Insert 22</strong>: ➕ O(log n)</p>
+<ul>
+<li>Search path: [10, 20] → [25, 30]</li>
+<li>Insert into leaf: [22, 25, 30]</li>
+<li>Split leaf: [22] [25, 30]</li>
+<li>Propagate up:</li>
+</ul>
+<pre><code>     [10, 20, 22]
+  /    |    \    \
+[5] [15, 18] [22] [25, 30]
+</code></pre>
+</li>
+<li><strong>Range query [15, 25]</strong>: 📊 O(log n + k)</p>
+<ul>
+<li>Search for 15: 2 comparisons</li>
+<li>Sequential access: 15, 18, 22, 25
+★ Total elements retrieved: 4 (k)</li>
+</ul>
+</li>
+</ol>
+<svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="-8 -8 341.6640625 133" style="max-width: 341.6640625px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-0"><style>#mermaid-0{font-family:arial,sans-serif;font-size:16px;fill:#333;}#mermaid-0 .error-icon{fill:#552222;}#mermaid-0 .error-text{fill:#552222;stroke:#552222;}#mermaid-0 .edge-thickness-normal{stroke-width:2px;}#mermaid-0 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-0 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-0 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-0 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-0 .marker{fill:#333333;stroke:#333333;}#mermaid-0 .marker.cross{stroke:#333333;}#mermaid-0 svg{font-family:arial,sans-serif;font-size:16px;}#mermaid-0 .label{font-family:arial,sans-serif;color:#333;}#mermaid-0 .cluster-label text{fill:#333;}#mermaid-0 .cluster-label span,#mermaid-0 p{color:#333;}#mermaid-0 .label text,#mermaid-0 span,#mermaid-0 p{fill:#333;color:#333;}#mermaid-0 .node rect,#mermaid-0 .node circle,#mermaid-0 .node ellipse,#mermaid-0 .node polygon,#mermaid-0 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-0 .flowchart-label text{text-anchor:middle;}#mermaid-0 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-0 .node .label{text-align:center;}#mermaid-0 .node.clickable{cursor:pointer;}#mermaid-0 .arrowheadPath{fill:#333333;}#mermaid-0 .edgePath .path{stroke:#333333;stroke-width:2.0px;}#mermaid-0 .flowchart-link{stroke:#333333;fill:none;}#mermaid-0 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-0 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-0 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#mermaid-0 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#mermaid-0 .cluster text{fill:#333;}#mermaid-0 .cluster span,#mermaid-0 p{color:#333;}#mermaid-0 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-0 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-0 :root{--mermaid-font-family:arial,sans-serif;}</style><g><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="6" viewBox="0 0 10 10" class="marker flowchart" id="mermaid-0_flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart" id="mermaid-0_flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart" id="mermaid-0_flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart" id="mermaid-0_flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart" id="mermaid-0_flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart" id="mermaid-0_flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-B" id="L-A-B-0" d="M108.625,29.621L92.512,34.434C76.4,39.247,44.174,48.874,28.062,56.97C11.949,65.067,11.949,71.633,11.949,74.917L11.949,78.2"></path><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-C" id="L-A-C-0" d="M132.425,33.5L127.628,37.667C122.83,41.833,113.235,50.167,108.438,57.617C103.641,65.067,103.641,71.633,103.641,74.917L103.641,78.2"></path><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-D" id="L-A-D-0" d="M170.997,33.5L175.794,37.667C180.592,41.833,190.186,50.167,194.984,57.617C199.781,65.067,199.781,71.633,199.781,74.917L199.781,78.2"></path><path marker-end="url(#mermaid-0_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-E" id="L-A-E-0" d="M194.797,29.224L211.651,34.103C228.505,38.982,262.214,48.741,279.068,56.904C295.922,65.067,295.922,71.633,295.922,74.917L295.922,78.2"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(151.7109375, 16.75)" data-id="A" data-node="true" id="flowchart-A-0" class="node default default flowchart-label"><rect height="33.5" width="86.171875" y="-16.75" x="-43.0859375" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-35.5859375, -9.25)" style="" class="label"><rect></rect><foreignObject height="18.5" width="71.171875"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">10, 20, 22</span></div></foreignObject></g></g><g transform="translate(11.94921875, 100.25)" data-id="B" data-node="true" id="flowchart-B-1" class="node default default flowchart-label"><rect height="33.5" width="23.8984375" y="-16.75" x="-11.94921875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.44921875, -9.25)" style="" class="label"><rect></rect><foreignObject height="18.5" width="8.8984375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">5</span></div></foreignObject></g></g><g transform="translate(103.640625, 100.25)" data-id="C" data-node="true" id="flowchart-C-3" class="node default default flowchart-label"><rect height="33.5" width="59.484375" y="-16.75" x="-29.7421875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-22.2421875, -9.25)" style="" class="label"><rect></rect><foreignObject height="18.5" width="44.484375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">15, 18</span></div></foreignObject></g></g><g transform="translate(199.78125, 100.25)" data-id="D" data-node="true" id="flowchart-D-5" class="node default default flowchart-label"><rect height="33.5" width="32.796875" y="-16.75" x="-16.3984375" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-8.8984375, -9.25)" style="" class="label"><rect></rect><foreignObject height="18.5" width="17.796875"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">22</span></div></foreignObject></g></g><g transform="translate(295.921875, 100.25)" data-id="E" data-node="true" id="flowchart-E-7" class="node default default flowchart-label"><rect height="33.5" width="59.484375" y="-16.75" x="-29.7421875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-22.2421875, -9.25)" style="" class="label"><rect></rect><foreignObject height="18.5" width="44.484375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">25, 30</span></div></foreignObject></g></g></g></g></g></svg>
+<hr>
+<p>The <strong>self-balancing property</strong> of B-trees is crucial for maintaining consistent performance over time. This property ensures that the tree remains balanced after insertions and deletions, preventing degradation into less efficient structures.</p>
+<p>Key aspects of self-balancing in B-trees:</p>
+<ul>
+<li>Automatic node splitting when a node becomes too full</li>
+<li>Merging or redistributing keys when a node becomes underfull</li>
+<li>Maintaining a minimum fill factor for all nodes (except the root)</li>
+</ul>
+<p>These mechanisms work together to keep the tree height logarithmic in relation to the number of elements, guaranteeing predictable performance for all operations.</p>
+<hr>
+<p>The concept of <strong>amortized time complexity</strong> is particularly relevant when analyzing the performance of B-trees due to their self-balancing nature. While individual operations like insertion or deletion might occasionally trigger more expensive rebalancing operations, these costs are distributed across many operations over time.</p>
+<p>Consider a sequence of n operations on a B-tree:</p>
+<ul>
+<li>Most operations take O(log n) time</li>
+<li>Occasional rebalancing operations may take O(log n) or even O(n) time in rare cases</li>
+<li>Amortized analysis shows that the average cost per operation remains O(log n)</li>
+</ul>
+<p>This amortized bound provides a more accurate representation of B-tree performance in real-world scenarios, where trees undergo numerous operations over their lifetime.</p>
+<h1>📊 Amortized Analysis of B-tree Operations</h1>
+<p>Consider a B-tree of order 3 with <strong>1000 elements</strong>. Perform 100 operations:</p>
+<ol>
+<li>🔍 <strong>90 searches</strong>: Each O(log 1000) ≈ O(10)</p>
+<blockquote>
+<p>Total cost: 90 * 10 = 900</p>
+</blockquote>
+</li>
+<li>➕ <strong>9 insertions</strong>: Each O(log 1000) ≈ O(10)</p>
+<blockquote>
+<p>Total cost: 9 * 10 = 90</p>
+</blockquote>
+</li>
+<li>💥 <strong>1 insertion causing splits up to root</strong>: O(1000) (worst case)</p>
+<blockquote>
+<p>Total cost: 1000</p>
+</blockquote>
+</li>
+</ol>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>Operation Type</th>
+<th>Count</th>
+<th>Individual Cost</th>
+<th>Total Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Searches</td>
+<td>90</td>
+<td>O(10)</td>
+<td>900</td>
+</tr>
+<tr>
+<td>Normal Inserts</td>
+<td>9</td>
+<td>O(10)</td>
+<td>90</td>
+</tr>
+<tr>
+<td>Worst Insert</td>
+<td>1</td>
+<td>O(1000)</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table></div>
+<p>✅ Total cost of 100 operations: 900 + 90 + 1000 = 1990<br />⚠️ Amortized cost per operation: 1990 / 100 = 19.9</p>
+<p><strong>IMPORTANT</strong>: Despite one expensive operation, the amortized cost remains O(log n).</p>
+<hr>
+<p>When designing B-tree variants or choosing parameters for specific use cases, consider:</p>
+<ol>
+<li><strong>Trade-offs between node size and tree height</strong>: Larger nodes reduce tree height but increase individual node processing time.</li>
+<li><strong>I/O efficiency vs. in-memory performance</strong>: Optimizing for disk I/O may differ from optimizing for in-memory operations.</li>
+<li><strong>Workload characteristics</strong>: Read-heavy vs. write-heavy workloads may benefit from different key distributions and node sizes.</li>
+<li><strong>Concurrency considerations</strong>: Key distribution can affect locking strategies and parallelism in multi-threaded environments.</li>
+</ol>
+<p>By carefully analyzing these factors, you can fine-tune B-tree implementations to achieve optimal performance for specific applications while maintaining the fundamental benefits of the data structure.</p>
+<h1>🌳 B-tree Variants Comparison</h1>
+<h2>1. 💽 Disk-Based B-tree (Large Node Size)</h2>
+<ul>
+<li>Node size: <strong>4 KB</strong> (fits disk block)</li>
+<li>Keys per node: 100</li>
+<li>Height for 1 million keys: ~3</li>
+<li>✅ Pros: Minimizes I/O operations</li>
+<li>❌ Cons: Higher in-memory processing time</li>
+</ul>
+<h2>2. 💻 In-Memory B-tree (Small Node Size)</h2>
+<ul>
+<li>Node size: <strong>128 bytes</strong></li>
+<li>Keys per node: 10</li>
+<li>Height for 1 million keys: ~6</li>
+<li>✅ Pros: Faster in-memory operations</li>
+<li>❌ Cons: More pointer chasing, larger memory footprint</li>
+</ul>
+<h2>🔄 Trade-offs:</h2>
+<pre><code>┌─────────────┬───────────────────────────────────────────┐
+│ Aspect      │ Disk-based vs In-memory                   │
+├─────────────┼───────────────────────────────────────────┤
+│ I/O vs. CPU │ Optimizes for I/O vs Optimizes for CPU    │
+│ Space vs.   │ Uses space for better time complexity     │
+│ Time        │                                           │
+│ Read vs.    │ Larger nodes benefit read-heavy workloads │
+│ Write       │                                           │
+└─────────────┴───────────────────────────────────────────┘
+</code></pre>
+<p><strong>KEY TAKEAWAY</strong>: Choose the variant based on your specific use case and hardware constraints!</p>
+<svg aria-roledescription="classDiagram" role="graphics-document document" viewBox="0 0 369.0546875 248.5" style="max-width: 369.0546875px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-1"><style>#mermaid-1{font-family:arial,sans-serif;font-size:16px;fill:#333;}#mermaid-1 .error-icon{fill:#552222;}#mermaid-1 .error-text{fill:#552222;stroke:#552222;}#mermaid-1 .edge-thickness-normal{stroke-width:2px;}#mermaid-1 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1 .marker{fill:#333333;stroke:#333333;}#mermaid-1 .marker.cross{stroke:#333333;}#mermaid-1 svg{font-family:arial,sans-serif;font-size:16px;}#mermaid-1 g.classGroup text{fill:#9370DB;stroke:none;font-family:arial,sans-serif;font-size:10px;}#mermaid-1 g.classGroup text .title{font-weight:bolder;}#mermaid-1 .nodeLabel,#mermaid-1 .edgeLabel{color:#131300;}#mermaid-1 .edgeLabel .label rect{fill:#ECECFF;}#mermaid-1 .label text{fill:#131300;}#mermaid-1 .edgeLabel .label span{background:#ECECFF;}#mermaid-1 .classTitle{font-weight:bolder;}#mermaid-1 .node rect,#mermaid-1 .node circle,#mermaid-1 .node ellipse,#mermaid-1 .node polygon,#mermaid-1 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-1 .divider{stroke:#9370DB;stroke-width:1;}#mermaid-1 g.clickable{cursor:pointer;}#mermaid-1 g.classGroup rect{fill:#ECECFF;stroke:#9370DB;}#mermaid-1 g.classGroup line{stroke:#9370DB;stroke-width:1;}#mermaid-1 .classLabel .box{stroke:none;stroke-width:0;fill:#ECECFF;opacity:0.5;}#mermaid-1 .classLabel .label{fill:#9370DB;font-size:10px;}#mermaid-1 .relation{stroke:#333333;stroke-width:1;fill:none;}#mermaid-1 .dashed-line{stroke-dasharray:3;}#mermaid-1 .dotted-line{stroke-dasharray:1 2;}#mermaid-1 #compositionStart,#mermaid-1 .composition{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #compositionEnd,#mermaid-1 .composition{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #dependencyStart,#mermaid-1 .dependency{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #dependencyStart,#mermaid-1 .dependency{fill:#333333!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #extensionStart,#mermaid-1 .extension{fill:transparent!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #extensionEnd,#mermaid-1 .extension{fill:transparent!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #aggregationStart,#mermaid-1 .aggregation{fill:transparent!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #aggregationEnd,#mermaid-1 .aggregation{fill:transparent!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #lollipopStart,#mermaid-1 .lollipop{fill:#ECECFF!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 #lollipopEnd,#mermaid-1 .lollipop{fill:#ECECFF!important;stroke:#333333!important;stroke-width:1;}#mermaid-1 .edgeTerminals{font-size:11px;line-height:initial;}#mermaid-1 .classTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-1 :root{--mermaid-font-family:arial,sans-serif;}</style><g><defs><marker orient="auto" markerHeight="240" markerWidth="190" refY="7" refX="18" class="marker aggregation classDiagram" id="mermaid-1_classDiagram-aggregationStart"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker orient="auto" markerHeight="28" markerWidth="20" refY="7" refX="1" class="marker aggregation classDiagram" id="mermaid-1_classDiagram-aggregationEnd"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker orient="auto" markerHeight="240" markerWidth="190" refY="7" refX="18" class="marker extension classDiagram" id="mermaid-1_classDiagram-extensionStart"><path d="M 1,7 L18,13 V 1 Z"></path></marker></defs><defs><marker orient="auto" markerHeight="28" markerWidth="20" refY="7" refX="1" class="marker extension classDiagram" id="mermaid-1_classDiagram-extensionEnd"><path d="M 1,1 V 13 L18,7 Z"></path></marker></defs><defs><marker orient="auto" markerHeight="240" markerWidth="190" refY="7" refX="18" class="marker composition classDiagram" id="mermaid-1_classDiagram-compositionStart"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker orient="auto" markerHeight="28" markerWidth="20" refY="7" refX="1" class="marker composition classDiagram" id="mermaid-1_classDiagram-compositionEnd"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker orient="auto" markerHeight="240" markerWidth="190" refY="7" refX="6" class="marker dependency classDiagram" id="mermaid-1_classDiagram-dependencyStart"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker orient="auto" markerHeight="28" markerWidth="20" refY="7" refX="13" class="marker dependency classDiagram" id="mermaid-1_classDiagram-dependencyEnd"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><defs><marker orient="auto" markerHeight="240" markerWidth="190" refY="7" refX="13" class="marker lollipop classDiagram" id="mermaid-1_classDiagram-lollipopStart"><circle r="6" cy="7" cx="7" fill="transparent" stroke="black"></circle></marker></defs><defs><marker orient="auto" markerHeight="240" markerWidth="190" refY="7" refX="1" class="marker lollipop classDiagram" id="mermaid-1_classDiagram-lollipopEnd"><circle r="6" cy="7" cx="7" fill="transparent" stroke="black"></circle></marker></defs><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid-1_classDiagram-extensionEnd)" style="fill:none" class="edge-pattern-solid relation" id="id_DiskBasedBTree_BTree_1" d="M85.988,133L85.988,137.167C85.988,141.333,85.988,149.667,95.18,158.736C104.371,167.806,122.753,177.611,131.945,182.514L141.136,187.417"></path><path marker-end="url(#mermaid-1_classDiagram-extensionEnd)" style="fill:none" class="edge-pattern-solid relation" id="id_InMemoryBTree_BTree_2" d="M287.516,133L287.516,137.167C287.516,141.333,287.516,149.667,278.324,158.736C269.133,167.806,250.751,177.611,241.559,182.514L232.368,187.417"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(85.98828125, 70.5)" data-id="DiskBasedBTree" data-node="true" id="classId-DiskBasedBTree-0" class="node default"><rect height="125" width="155.9765625" y="-62.5" x="-77.98828125" class="outer title-state" style=""></rect><line y2="-32" y1="-32" x2="77.98828125" x1="-77.98828125" class="divider"></line><line y2="51.5" y1="51.5" x2="77.98828125" x1="-77.98828125" class="divider"></line><g class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"></span></div></foreignObject><foreignObject transform="translate( -63.14453125, -55)" height="18.5" width="126.2890625" class="classTitle"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">DiskBasedBTree</span></div></foreignObject><foreignObject transform="translate( -70.48828125, -20.5)" height="18.5" width="115.1953125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">+nodeSize: 4KB</span></div></foreignObject><foreignObject transform="translate( -70.48828125, 2)" height="18.5" width="140.9765625"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">+keysPerNode: 100</span></div></foreignObject><foreignObject transform="translate( -70.48828125, 24.5)" height="18.5" width="80.0703125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">+height: ~3</span></div></foreignObject></g></g><g transform="translate(287.515625, 70.5)" data-id="InMemoryBTree" data-node="true" id="classId-InMemoryBTree-1" class="node default"><rect height="125" width="147.078125" y="-62.5" x="-73.5390625" class="outer title-state" style=""></rect><line y2="-32" y1="-32" x2="73.5390625" x1="-73.5390625" class="divider"></line><line y2="51.5" y1="51.5" x2="73.5390625" x1="-73.5390625" class="divider"></line><g class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"></span></div></foreignObject><foreignObject transform="translate( -60.01953125, -55)" height="18.5" width="120.0390625" class="classTitle"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">InMemoryBTree</span></div></foreignObject><foreignObject transform="translate( -66.0390625, -20.5)" height="18.5" width="122.3203125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">+nodeSize: 128B</span></div></foreignObject><foreignObject transform="translate( -66.0390625, 2)" height="18.5" width="132.078125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">+keysPerNode: 10</span></div></foreignObject><foreignObject transform="translate( -66.0390625, 24.5)" height="18.5" width="80.0703125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">+height: ~6</span></div></foreignObject></g></g><g transform="translate(186.751953125, 211.75)" data-id="BTree" data-node="true" id="classId-BTree-2" class="node default"><rect height="57.5" width="59.46875" y="-28.75" x="-29.734375" class="outer title-state" style=""></rect><line y2="1.75" y1="1.75" x2="29.734375" x1="-29.734375" class="divider"></line><line y2="17.75" y1="17.75" x2="29.734375" x1="-29.734375" class="divider"></line><g class="label"><foreignObject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"></span></div></foreignObject><foreignObject transform="translate( -22.234375, -21.25)" height="18.5" width="44.46875" class="classTitle"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">BTree</span></div></foreignObject></g></g></g></g></g></svg>
