@@ -33,15 +33,14 @@ const MyDocument = ({ stylesheets }: Props) => {
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const page = await ctx.renderPage({
-    // eslint-disable-next-line react/display-name
-    enhanceApp: (App: any) => (props: any) =>
-      (
-        <StyletronProvider value={styletron}>
-          <App {...props} />
-        </StyletronProvider>
-      ),
+    // ... existing code ...
   });
-  const stylesheets = (styletron as Server).getStylesheets() || [];
+
+  let stylesheets: Sheet[] = [];
+  if (styletron instanceof Server) {
+    stylesheets = styletron.getStylesheets() || [];
+  }
+
   return { ...page, stylesheets };
 };
 
