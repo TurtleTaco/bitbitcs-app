@@ -85,7 +85,7 @@ export default function Page() {
             <Input
               id="input-id"
               value={value}
-              onChange={onChange}
+              // onChange={onChange}
               onBlur={() => setIsVisited(true)}
               error={shouldShowError}
               overrides={shouldShowError ? { After: Negative } : {}}
