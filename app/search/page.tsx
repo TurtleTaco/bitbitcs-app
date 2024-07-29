@@ -37,6 +37,24 @@ export default function Page() {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [selectedTiles, setSelectedTiles] = React.useState<number[]>([]);
 
+  const iconColors = [
+    "#166c3b", // Green
+    "#276ef1", // Blue
+    "#9747FF", // Purple
+    "#7356BF", // Indigo
+    "#EA6B16", // Orange
+    "#E11900", // Red
+    "#1E54B7", // Dark Blue
+    "#5F6B7C", // Gray
+    "#05944F", // Bright Green
+    "#C63A38", // Dark Red
+    "#F4C61F", // Yellow
+    "#2089B5", // Teal
+    "#A872B9", // Lavender
+    "#FF6154", // Coral
+    "#454545", // Charcoal
+  ];
+
   const modules = [
     {
       id: 1,
@@ -60,6 +78,17 @@ export default function Page() {
     },
     { id: 6, title: "Probability Theory", chapter_cnt: 6, icon: RiPercentLine },
   ];
+
+  // First, let's define a simple hash function
+  const hashString = (str: String) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
+  };
 
   const toggleTileSelection = (id: number) => {
     setSelectedTiles((prev) =>
@@ -105,48 +134,53 @@ export default function Page() {
         </Button>
       </div>
       <div className="grid grid-cols-2 gap-4 p-3">
-        {modules.map((module) => (
-          <Tile
-            key={module.id}
-            tileKind={
-              selectedTiles.includes(module.id)
-                ? TILE_KIND.action
-                : TILE_KIND.selection
-            }
-            label={module.title}
-            leadingContent={() => <module.icon size={36} />}
-            trailingContent={() => <ChevronRight size={36} />}
-            headerAlignment={ALIGNMENT.left}
-            bodyAlignment={ALIGNMENT.left}
-            onClick={() => toggleTileSelection(module.id)}
-            overrides={{
-              Label: {
-                style: {
-                  textAlign: "left",
-                  wordBreak: "break-word",
-                  overflowWrap: "break-word",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  maxWidth: "15ch",
-                  lineHeight: "1.2em",
-                  height: "2.4em", // Set a fixed height
-                  minHeight: "2.4em", // Ensure minimum height
+        {modules.map((module) => {
+          const colorIndex = hashString(module.title) % iconColors.length;
+
+          return (
+            <Tile
+              key={module.id}
+              label={module.title}
+              leadingContent={() => (
+                <module.icon
+                  size={36}
+                  style={{ color: iconColors[colorIndex] }}
+                />
+              )}
+              trailingContent={() => <ChevronRight size={36} />}
+              headerAlignment={ALIGNMENT.left}
+              bodyAlignment={ALIGNMENT.left}
+              onClick={() => toggleTileSelection(module.id)}
+              tileKind={TILE_KIND.action}
+              overrides={{
+                Label: {
+                  style: {
+                    textAlign: "left",
+                    wordBreak: "break-word",
+                    overflowWrap: "break-word",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    maxWidth: "15ch",
+                    lineHeight: "1.2em",
+                    height: "2.4em", // Set a fixed height for 2 lines
+                    minHeight: "2.4em", // Ensure minimum height of 2 lines
+                  },
                 },
-              },
-              Root: {
-                style: {
-                  outline: selectedTiles.includes(module.id)
-                    ? `${theme.colors.black} solid`
-                    : theme.colors.backgroundPrimary,
+                Root: {
+                  style: {
+                    outline: selectedTiles.includes(module.id)
+                      ? `${theme.colors.black} solid`
+                      : theme.colors.backgroundPrimary,
+                  },
                 },
-              },
-            }}
-          >
-            <StyledParagraph>{module.chapter_cnt} chapters</StyledParagraph>
-          </Tile>
-        ))}
+              }}
+            >
+              <StyledParagraph>{module.chapter_cnt} chapters</StyledParagraph>
+            </Tile>
+          );
+        })}
       </div>
     </SearchContainer>
   );

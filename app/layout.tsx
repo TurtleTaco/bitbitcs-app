@@ -22,7 +22,8 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <StyletronProvider value={styletron}>
           <BaseProvider theme={LightTheme}>
-            <div className="mx-auto max-w-[390px] h-screen flex flex-col shadow-lg rounded-xl overflow-hidden">
+            {/* <div className="mx-auto pt-4 max-w-[390px] h-[844px] flex flex-col shadow-lg rounded-xl overflow-hidden"> */}
+            <div className="mx-auto pt-4 w-screen h-screen flex flex-col shadow-lg rounded-xl overflow-hidden">
               <main className="flex-1 overflow-y-auto">{children}</main>
               <div className="flex-shrink-0">
                 <BottomNav />

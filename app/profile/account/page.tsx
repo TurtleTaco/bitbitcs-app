@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Avatar } from "baseui/avatar";
 
 import * as React from "react";
@@ -14,6 +15,7 @@ import { useStyletron } from "baseui";
 import { Alert } from "baseui/icon";
 import { validate as validateEmail } from "email-validator"; // add this package to your repo: `$ pnpm add email-validator`
 import { Checkbox, STYLE_TYPE, LABEL_PLACEMENT } from "baseui/checkbox";
+import { handleBackNavigation } from "app/lib/navigation";
 
 // react icon
 import { MdKeyboardArrowLeft } from "react-icons/md";
@@ -49,6 +51,8 @@ export default function Page() {
     setValue(value);
   };
 
+  const pathname = usePathname();
+
   // toggles
   const [emailNodify, setEmailNofigy] = React.useState(true);
 
@@ -66,7 +70,7 @@ export default function Page() {
             <Button
               size={SIZE.compact}
               kind={KIND.secondary}
-              onClick={() => router.back()}
+              onClick={() => handleBackNavigation(router, pathname)}
             >
               <MdKeyboardArrowLeft />
             </Button>
