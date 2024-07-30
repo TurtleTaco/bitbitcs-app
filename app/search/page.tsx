@@ -111,76 +111,82 @@ export default function Page() {
           </Button>
         )}
       />
-      <div className="flex flex-col p-3 sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-        <Input
-          inputRef={inputRef}
-          placeholder="Course name"
-          overrides={{
-            Root: {
-              style: {
-                width: "100%",
-                maxWidth: "100%",
-                marginRight: 0,
+      <div className="p-3">
+        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-4">
+          <Input
+            inputRef={inputRef}
+            placeholder="Course name"
+            overrides={{
+              Root: {
+                style: {
+                  width: "100%",
+                  maxWidth: "100%",
+                  marginRight: 0,
+                },
               },
-            },
-          }}
-          endEnhancer={<Search size="18px" title="" />}
-        />
-        <Button
-          onClick={() => inputRef.current && inputRef.current.focus()}
-          className="w-full sm:w-auto"
-        >
-          Find
-        </Button>
-      </div>
-      <div className="grid grid-cols-2 gap-4 p-3">
-        {modules.map((module) => {
-          const colorIndex = hashString(module.title) % iconColors.length;
+            }}
+            endEnhancer={<Search size="18px" title="" />}
+          />
+          <Button
+            onClick={() => inputRef.current && inputRef.current.focus()}
+            className="w-full sm:w-auto"
+          >
+            Find
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 xs:grid-cols-2 gap-4">
+          {modules.map((module) => {
+            const colorIndex = hashString(module.title) % iconColors.length;
 
-          return (
-            <Tile
-              key={module.id}
-              label={module.title}
-              leadingContent={() => (
-                <module.icon
-                  size={36}
-                  style={{ color: iconColors[colorIndex] }}
-                />
-              )}
-              trailingContent={() => <ChevronRight size={36} />}
-              headerAlignment={ALIGNMENT.left}
-              bodyAlignment={ALIGNMENT.left}
-              onClick={() => toggleTileSelection(module.id)}
-              tileKind={TILE_KIND.action}
-              overrides={{
-                Label: {
-                  style: {
-                    textAlign: "left",
-                    wordBreak: "break-word",
-                    overflowWrap: "break-word",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    maxWidth: "15ch",
-                    lineHeight: "1.2em",
-                    height: "2.4em", // Set a fixed height for 2 lines
-                    minHeight: "2.4em", // Ensure minimum height of 2 lines
-                  },
-                },
-                Root: {
-                  style: {
-                    outline: selectedTiles.includes(module.id)
-                      ? `${theme.colors.black} solid`
-                      : theme.colors.backgroundPrimary,
-                  },
-                },
-              }}
-            >
-              <StyledParagraph>{module.chapter_cnt} chapters</StyledParagraph>
-            </Tile>
-          );
-        })}
+            return (
+              <div key={module.id} className="w-full">
+                <Tile
+                  label={module.title}
+                  leadingContent={() => (
+                    <module.icon
+                      size={36}
+                      style={{ color: iconColors[colorIndex] }}
+                    />
+                  )}
+                  trailingContent={() => <ChevronRight size={36} />}
+                  headerAlignment={ALIGNMENT.left}
+                  bodyAlignment={ALIGNMENT.left}
+                  onClick={() => toggleTileSelection(module.id)}
+                  tileKind={TILE_KIND.action}
+                  overrides={{
+                    Label: {
+                      style: {
+                        textAlign: "left",
+                        wordBreak: "break-word",
+                        overflowWrap: "break-word",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        lineHeight: "1.2em",
+                        height: "2.4em",
+                        minHeight: "2.4em",
+                      },
+                    },
+                    Root: {
+                      style: {
+                        width: "100%",
+                        height: "100%",
+                        outline: selectedTiles.includes(module.id)
+                          ? `${theme.colors.black} solid`
+                          : theme.colors.backgroundPrimary,
+                      },
+                    },
+                  }}
+                >
+                  <StyledParagraph>
+                    {module.chapter_cnt} chapters
+                  </StyledParagraph>
+                </Tile>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </SearchContainer>
   );

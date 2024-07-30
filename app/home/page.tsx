@@ -184,7 +184,7 @@ export default function Page() {
 
   // In your component
   const handleTileClick = (moduleId: number) => {
-    router.push(`/home/${moduleId}`);
+    router.push(`/home/moduleinfo`);
   };
 
   // First, let's define a simple hash function
@@ -266,52 +266,68 @@ export default function Page() {
             placeholder="Select Study Path"
             onChange={(params) => setStudyPath(params.value as any)}
             searchable={false}
+            overrides={{
+              Input: {
+                props: {
+                  readOnly: true,
+                },
+              },
+            }}
           />
+        </div>
+        <div className="mt-4 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
+          {modules.map((module, index) => {
+            const colorIndex = hashString(module.title) % iconColors.length;
+
+            return (
+              <div key={module.id} className="w-full">
+                <Tile
+                  label={module.title}
+                  leadingContent={() => (
+                    <module.icon
+                      size={36}
+                      style={{ color: iconColors[colorIndex] }}
+                    />
+                  )}
+                  trailingContent={() => <ChevronRight size={36} />}
+                  headerAlignment={ALIGNMENT.left}
+                  bodyAlignment={ALIGNMENT.left}
+                  onClick={() => handleTileClick(module.id)}
+                  tileKind={TILE_KIND.action}
+                  overrides={{
+                    Root: {
+                      style: {
+                        height: "100%",
+                        width: "100%",
+                      },
+                    },
+                    Label: {
+                      style: {
+                        textAlign: "left",
+                        wordBreak: "break-word",
+                        overflowWrap: "break-word",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        lineHeight: "1.2em",
+                        height: "2.4em",
+                        minHeight: "2.4em",
+                      },
+                    },
+                  }}
+                >
+                  <StyledParagraph>
+                    {module.chapter_cnt} chapters
+                  </StyledParagraph>
+                </Tile>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 p-3">
-        {modules.map((module) => {
-          const colorIndex = hashString(module.title) % iconColors.length;
-
-          return (
-            <Tile
-              key={module.id}
-              label={module.title}
-              leadingContent={() => (
-                <module.icon
-                  size={36}
-                  style={{ color: iconColors[colorIndex] }}
-                />
-              )}
-              trailingContent={() => <ChevronRight size={36} />}
-              headerAlignment={ALIGNMENT.left}
-              bodyAlignment={ALIGNMENT.left}
-              onClick={() => handleTileClick(module.id)}
-              tileKind={TILE_KIND.action}
-              overrides={{
-                Label: {
-                  style: {
-                    textAlign: "left",
-                    wordBreak: "break-word",
-                    overflowWrap: "break-word",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    maxWidth: "15ch",
-                    lineHeight: "1.2em",
-                    height: "2.4em",
-                    minHeight: "2.4em",
-                  },
-                },
-              }}
-            >
-              <StyledParagraph>{module.chapter_cnt} chapters</StyledParagraph>
-            </Tile>
-          );
-        })}
-      </div>
+      <div className="grid grid-cols-2 gap-4 p-3"></div>
     </HomeContainer>
   );
 }
