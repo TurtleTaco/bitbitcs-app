@@ -1,33 +1,43 @@
 "use client";
 
 import React from "react";
-import { TreeView, TreeNodeData, toggleIsExpanded } from "baseui/tree-view";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { styled } from "baseui";
-import { useStyletron } from "baseui";
 import { ListHeading } from "baseui/list";
 import { Button, KIND, SIZE } from "baseui/button";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { FaCheckCircle } from "react-icons/fa";
+import { RiShieldKeyholeLine } from "react-icons/ri";
 import { handleBackNavigation } from "app/lib/navigation";
-import { Slider } from "baseui/slider";
-import Lottie from "lottie-react";
-import fireAnimation from "public/fire_animation.json";
-import {
-  RiShieldKeyholeLine,
-  RiDatabase2Line,
-  RiFlowChart,
-  RiLockLine,
-  RiAlarmWarningLine,
-  RiPercentLine,
-  RiSearchLine,
-  RiArrowRightSLine,
-} from "react-icons/ri";
+import { ProgressSteps, NumberedStep } from "baseui/progress-steps";
 import { ListItem, ListItemLabel, ARTWORK_SIZES } from "baseui/list";
 import { ProgressBar } from "baseui/progress-bar";
 import { Tag, KIND as TAGKIND } from "baseui/tag";
+import { Theme } from "baseui/theme";
+import { StyleObject } from "styletron-react";
 
-const module_info = {
+interface Subtopic {
+  title: string;
+  completed: boolean;
+}
+
+interface DP {
+  dp_title: string;
+  difficulty: string;
+  subtopics: Subtopic[];
+}
+
+interface Chapter {
+  chapter_title: string;
+  dps: DP[];
+}
+
+interface ModuleInfo {
+  module_title: string;
+  icon: React.ComponentType;
+  chapters: Chapter[];
+}
+
+const module_info: ModuleInfo = {
   module_title: "Advanced Indexing Strategies",
   icon: RiShieldKeyholeLine,
   chapters: [
@@ -47,7 +57,7 @@ const module_info = {
           dp_title: "Index Data Structures",
           difficulty: "Intro",
           subtopics: [
-            { title: "Hash-based Indexes", completed: true },
+            { title: "Hash-based Indexes", completed: false },
             { title: "Tree-based Indexes", completed: true },
           ],
         },
@@ -95,126 +105,58 @@ const HomeContainer = styled("div", {
   padding: "10px",
 });
 
-const Label = styled("div", {
-  display: "flex",
-  flexGrow: 1,
-  paddingRight: "5px",
-  alignItems: "center",
+const ChapterTitle = styled("h2", {
+  fontSize: "1.5rem",
+  marginTop: "2rem",
+  marginBottom: "1rem",
 });
 
-const CheckIcon = styled(FaCheckCircle, {
-  marginLeft: "5px",
-  flexShrink: 0,
-  width: "16px",
-  height: "16px",
-});
-
-interface ModuleInfo {
-  module_title: string;
-  chapters: {
-    chapter_title: string;
-    dps: {
-      dp_title: string;
-      difficulty: "Intro" | "Medium" | "Advanced";
-      subtopics: { title: string; completed: boolean }[];
-    }[];
-  }[];
+interface SubtopicLinkProps {
+  $completed: boolean;
 }
 
-const customLabel = (node: TreeNodeData) => {
-  return (
-    <Label>
-      <div style={{ color: node.completed ? "green" : "inherit" }}>
-        {node.title}
-      </div>
-      {node.completed && <CheckIcon color="green" />}
-    </Label>
-  );
-};
-
-const createTreeData = (moduleInfo: ModuleInfo): TreeNodeData[] => {
-  let firstUncompleted = true;
-
-  return moduleInfo.chapters.map((chapter, chapterIndex) => {
-    const chapterCompleted = chapter.dps.every((dp) =>
-      dp.subtopics.every((subtopic) => subtopic.completed)
-    );
+const SubtopicLink = styled<"a", SubtopicLinkProps>(
+  "a",
+  ({ $theme, $completed }: SubtopicLinkProps & { $theme: Theme }) => {
     return {
-      id: `chapter-${chapterIndex}`,
-      label: customLabel,
-      isExpanded: !chapterCompleted && firstUncompleted,
-      title: chapter.chapter_title,
-      completed: chapterCompleted,
-      children: chapter.dps.map((dp, dpIndex) => {
-        const dpCompleted = dp.subtopics.every(
-          (subtopic) => subtopic.completed
-        );
-        const dpNode: TreeNodeData = {
-          id: `dp-${chapterIndex}-${dpIndex}`,
-          label: customLabel,
-          isExpanded: !dpCompleted && firstUncompleted,
-          title: dp.dp_title,
-          completed: dpCompleted,
-          difficulty: dp.difficulty, // Add this line
-          children: dp.subtopics.map((subtopic, subtopicIndex) => {
-            const subtopicNode: TreeNodeData = {
-              id: `subtopic-${chapterIndex}-${dpIndex}-${subtopicIndex}`,
-              label: customLabel,
-              title: subtopic.title,
-              completed: subtopic.completed,
-            };
-            if (firstUncompleted && !subtopic.completed) {
-              firstUncompleted = false;
-            }
-            return subtopicNode;
-          }),
-        };
-        return dpNode;
-      }),
-    };
-  });
-};
-
-const LottieThumb: React.FC<{ $value: number[] }> = ({ $value }) => {
-  const [css] = useStyletron();
-
-  return (
-    <div
-      className={css({
-        width: "40px",
-        height: "40px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "absolute",
-        top: "-20px",
-        left: "-20px",
-        // Remove absolute positioning
-        transform: "translateX(20px)", // Center the thumb on the current value
-      })}
-    >
-      <Lottie
-        animationData={fireAnimation}
-        loop={true}
-        autoplay={true}
-        style={{ width: "100%", height: "100%" }}
-      />
-    </div>
-  );
-};
+      cursor: "pointer",
+      textDecoration: "none",
+      // ':hover': {
+      //   textDecoration: 'underline',
+      // },
+      display: "inline-flex",
+      alignItems: "center",
+      marginBottom: "0.5rem",
+    } as StyleObject;
+  }
+);
 
 export default function Page() {
   const params = useParams();
   const pathname = usePathname();
   const router = useRouter();
 
-  const [treeData, setTreeData] = React.useState<TreeNodeData[]>(
-    createTreeData(module_info)
-  );
+  const [completionPercent, setCompletionPercent] = React.useState<number[]>([
+    60,
+  ]);
 
-  const [completionPercent, setCompletionPercent] = React.useState([60]);
+  // Find the index of the first uncompleted subtopic
+  const findFirstUncompletedSubtopic = (chapter: Chapter): number => {
+    for (let dpIndex = 0; dpIndex < chapter.dps.length; dpIndex++) {
+      const dp = chapter.dps[dpIndex];
+      if (dp.subtopics.some((subtopic) => !subtopic.completed)) {
+        return dpIndex;
+      }
+    }
+    // If all subtopics are completed, return the last DP index
+    return chapter.dps.length - 1;
+  };
 
-  // calcualte completion percentage
+  const findFirstUncompletedSubtopicIndex = (dp: DP): number => {
+    return dp.subtopics.findIndex((subtopic) => !subtopic.completed);
+  };
+
+  // Calculate completion percentage
   React.useEffect(() => {
     const totalSubtopics = module_info.chapters.reduce(
       (acc, chapter) =>
@@ -236,23 +178,10 @@ export default function Page() {
     ]);
   }, []);
 
-  const getId = (node: TreeNodeData): string => node.id as string;
-
-  const handleToggle = (node: TreeNodeData) => {
-    if (!node.children || node.children.length === 0) {
-      // This is a leaf node, navigate to the learn page
-      router.push(`/learn?topic=${encodeURIComponent(node.title as string)}`);
-    } else {
-      // For non-leaf nodes, toggle expansion
-      setTreeData((prevData) => toggleIsExpanded(prevData, node, getId));
-    }
-  };
-
   return (
     <HomeContainer className="p-4">
       <ListHeading
         heading="Hello, Lin!"
-        // subHeading="3 Modules to go!"
         maxLines={1}
         endEnhancer={() => (
           <Button
@@ -266,7 +195,6 @@ export default function Page() {
       />
 
       <ListItem
-        artwork={module_info.icon as any}
         artworkSize={ARTWORK_SIZES.MEDIUM}
         endEnhancer={() => (
           <ProgressBar value={completionPercent[0]} showLabel />
@@ -277,13 +205,68 @@ export default function Page() {
         </ListItemLabel>
       </ListItem>
 
-      <div className="pl-3 pr-3 pt-3">
-        <TreeView
-          indentGuides
-          data={treeData}
-          getId={getId}
-          onToggle={handleToggle}
-        />
+      <div className="p-4">
+        {module_info.chapters.map((chapter, chapterIndex) => (
+          <React.Fragment key={`chapter-${chapterIndex}`}>
+            <ChapterTitle>
+              Chapter {chapterIndex + 1}: {chapter.chapter_title}
+            </ChapterTitle>
+            <div className="[&_ol_li::before]:content-none">
+              <ProgressSteps
+                current={findFirstUncompletedSubtopic(chapter)}
+                alwaysShowDescription
+              >
+                {chapter.dps.map((dp, dpIndex) => (
+                  <NumberedStep
+                    key={`dp-${chapterIndex}-${dpIndex}`}
+                    title={dp.dp_title}
+                  >
+                    {dp.subtopics.map((subtopic, subtopicIndex) => (
+                      <p
+                        key={`subtopic-${chapterIndex}-${dpIndex}-${subtopicIndex}`}
+                      >
+                        <SubtopicLink
+                          $completed={subtopic.completed}
+                          onClick={() =>
+                            router.push(
+                              `/learn?subtopic=${encodeURIComponent(
+                                subtopic.title
+                              )}`
+                            )
+                          }
+                        >
+                          <Tag
+                            closeable={false}
+                            kind={
+                              subtopic.completed
+                                ? TAGKIND.green
+                                : TAGKIND.neutral
+                            }
+                          >
+                            {subtopic.completed ? "Aced" : "Todo"}
+                          </Tag>
+                          {subtopic.title}
+                        </SubtopicLink>
+                      </p>
+                    ))}
+                    {findFirstUncompletedSubtopicIndex(dp) === -1 ? null : (
+                      <Button
+                        size="compact"
+                        onClick={() =>
+                          router.push(
+                            `/learn?topic=${encodeURIComponent(dp.dp_title)}`
+                          )
+                        }
+                      >
+                        Start Learning
+                      </Button>
+                    )}
+                  </NumberedStep>
+                ))}
+              </ProgressSteps>
+            </div>
+          </React.Fragment>
+        ))}
       </div>
     </HomeContainer>
   );

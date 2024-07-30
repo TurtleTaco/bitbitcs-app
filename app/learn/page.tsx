@@ -41,10 +41,6 @@ export default function Page() {
 
   const handleNext = () => {
     if (currentSnippet < htmlContent.length - 1) {
-      console.log(currentSnippet + 1);
-      console.log(htmlContent.length);
-      console.log(((currentSnippet + 1) / htmlContent.length) * 100 - 1);
-      console.log("---------------");
       setStepProgress(((currentSnippet + 1) / htmlContent.length) * 100);
       setCurrentSnippet(currentSnippet + 1);
     }
