@@ -7,6 +7,8 @@ import { ListHeading } from "baseui/list";
 import { Button, KIND, SIZE } from "baseui/button";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { ProgressBar } from "baseui/progress-bar";
+import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
+import styles from "app/ui/html_content.module.css";
 
 const LearnContainer = styled("div", {
   padding: "10px",
@@ -17,6 +19,7 @@ export default function Page() {
   const [htmlContent, setHtmlContent] = useState([]);
   const [currentSnippet, setCurrentSnippet] = useState(0);
   const [stepProgress, setStepProgress] = useState(0);
+  const [showFireworks, setShowFireworks] = useState(false);
 
   useEffect(() => {
     async function fetchHtml() {
@@ -26,10 +29,8 @@ export default function Page() {
         );
         const html = await response.text();
         const snippets = html.split("<hr>");
-        // // before the first <hr> there are nothing, so we need to remove it
         snippets.shift();
 
-        console.log(snippets);
         setHtmlContent(snippets as any);
       } catch (error) {
         console.error("Error fetching HTML:", error);
@@ -43,18 +44,21 @@ export default function Page() {
     if (currentSnippet < htmlContent.length - 1) {
       setStepProgress(((currentSnippet + 1) / htmlContent.length) * 100);
       setCurrentSnippet(currentSnippet + 1);
+      triggerFireworks();
     }
   };
 
   const handlePrevious = () => {
     if (currentSnippet > 0) {
-      // console.log((currentSnippet - 1 / htmlContent.length) * 100);
       setStepProgress(((currentSnippet - 1) / htmlContent.length) * 100);
       setCurrentSnippet(currentSnippet - 1);
     }
   };
 
-  // const progress = (currentSnippet / htmlContent.length) * 100;
+  const triggerFireworks = () => {
+    setShowFireworks(true);
+    setTimeout(() => setShowFireworks(false), 1000);
+  };
 
   return (
     <LearnContainer className="p-4">
@@ -76,7 +80,7 @@ export default function Page() {
         <ProgressBar value={stepProgress} steps={htmlContent.length} />
       </div>
       <div
-        className="pl-5 pr-5"
+        className={`pl-5 pr-5 ${styles.htmlContentWrapper}`}
         dangerouslySetInnerHTML={{ __html: htmlContent[currentSnippet] || "" }}
       />
       <div
@@ -106,7 +110,7 @@ export default function Page() {
         )}
         {currentSnippet == htmlContent.length - 1 && (
           <Button
-            onClick={handleNext}
+            onClick={triggerFireworks}
             size={SIZE.compact}
             overrides={{
               BaseButton: {
@@ -121,6 +125,7 @@ export default function Page() {
             Complete
           </Button>
         )}
+        {showFireworks && <Fireworks autorun={{ speed: 1 }} />}
       </div>
     </LearnContainer>
   );

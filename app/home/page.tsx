@@ -1,9 +1,7 @@
 "use client";
 
-import { UrlObject } from "url";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { Avatar } from "baseui/avatar";
 
 import * as React from "react";
 import { ListHeading } from "baseui/list";
@@ -22,12 +20,18 @@ import {
   RiLockLine,
   RiAlarmWarningLine,
   RiPercentLine,
-  RiSearchLine,
-  RiArrowRightSLine,
 } from "react-icons/ri";
 import { Select } from "baseui/select";
 import { handleBackNavigation } from "app/lib/navigation";
 import { FaBoltLightning } from "react-icons/fa6";
+import {
+  fetchDailyCheckIns,
+  fetchStudyPaths,
+  fetchStudyPathModules,
+  DailyCheckIn,
+  Module,
+  StudyPath,
+} from "../utils/api";
 
 const HomeContainer = styled("div", {
   padding: "10px",
@@ -45,6 +49,8 @@ export default function Page() {
       content: "none !important",
     },
   });
+
+  const email = "zac@gmail.com";
 
   const iconColors = [
     "#166c3b", // Green
@@ -64,125 +70,61 @@ export default function Page() {
     "#454545", // Charcoal
   ];
 
-  interface Module {
-    id: number;
-    title: string;
-    chapter_cnt: number;
-    chapters: string[];
-    icon: React.ComponentType<{ size: number; style: React.CSSProperties }>;
-  }
+  const [dailyCheckIns, setDailyCheckIns] = React.useState<DailyCheckIn[]>([]);
+  const [modules, setModules] = React.useState<Module[]>([]);
+  const [studyPaths, setStudyPaths] = React.useState<StudyPath[]>([]);
+  const [currentStudyPath, setCurrentStudyPath] = React.useState<
+    [StudyPath] | []
+  >([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const modules: Module[] = [
-    {
-      id: 1,
-      title: "Advanced Indexing Strategies",
-      chapter_cnt: 4,
-      chapters: [
-        "Indexing with B-trees",
-        "Hash Indexes Usage",
-        "Full-Text Indexing Techniques",
-        "Indexing in Distributed Databases",
-      ],
-      icon: RiShieldKeyholeLine,
+  const fetchModules = React.useCallback(
+    async (email: string, studyPath: string) => {
+      try {
+        setIsLoading(true);
+        const modulesData = await fetchStudyPathModules(email, studyPath);
+        setModules(modulesData);
+      } catch (error) {
+        console.error("Error fetching modules:", error);
+      } finally {
+        setIsLoading(false);
+      }
     },
-    {
-      id: 2,
-      title: "Big Data Handling",
-      chapter_cnt: 4,
-      chapters: [
-        "Indexing with B-trees",
-        "Hash Indexes Usage",
-        "Full-Text Indexing Techniques",
-        "Indexing in Distributed Databases",
-      ],
-      icon: RiDatabase2Line,
-    },
-    {
-      id: 3,
-      title: "Data Modeling",
-      chapter_cnt: 4,
-      chapters: [
-        "Indexing with B-trees",
-        "Hash Indexes Usage",
-        "Full-Text Indexing Techniques",
-        "Indexing in Distributed Databases",
-      ],
-      icon: RiFlowChart,
-    },
-    {
-      id: 4,
-      title: "Network Security",
-      chapter_cnt: 4,
-      chapters: [
-        "Indexing with B-trees",
-        "Hash Indexes Usage",
-        "Full-Text Indexing Techniques",
-        "Indexing in Distributed Databases",
-      ],
-      icon: RiLockLine,
-    },
-    {
-      id: 5,
-      title: "Logging, Monitoring, and Alerting Systems",
-      chapter_cnt: 4,
-      chapters: [
-        "Indexing with B-trees",
-        "Hash Indexes Usage",
-        "Full-Text Indexing Techniques",
-        "Indexing in Distributed Databases",
-      ],
-      icon: RiAlarmWarningLine,
-    },
-    {
-      id: 6,
-      title: "Probability Theory",
-      chapter_cnt: 4,
-      chapters: [
-        "Indexing with B-trees",
-        "Hash Indexes Usage",
-        "Full-Text Indexing Techniques",
-        "Indexing in Distributed Databases",
-      ],
-      icon: RiPercentLine,
-    },
-  ];
+    []
+  );
 
-  // Define the type for our daily check-in data
-  type DailyCheckIn = {
-    day: string;
-    checkedIn: boolean;
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [checkIns, studyPathsData] = await Promise.all([
+          fetchDailyCheckIns(email),
+          fetchStudyPaths(email),
+        ]);
+
+        setDailyCheckIns(checkIns);
+        setStudyPaths(studyPathsData);
+
+        if (studyPathsData.length > 0) {
+          const firstStudyPath = studyPathsData[0];
+          setCurrentStudyPath([firstStudyPath]);
+          await fetchModules(email, firstStudyPath.id); // Assuming StudyPath has an 'id' property
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [fetchModules]);
+
+  const handleSwitchStudyPath = async (studyPath: [StudyPath]) => {
+    setCurrentStudyPath(studyPath);
+    setIsLoading(true);
+    console.log("Switching to study path:", studyPath);
+    await fetchModules(email, studyPath[0].id);
+    setIsLoading(false);
   };
 
-  // Hard-coded list of daily check-ins
-  const dailyCheckIns: DailyCheckIn[] = [
-    { day: "Mon", checkedIn: true },
-    { day: "Tue", checkedIn: false },
-    { day: "Wed", checkedIn: true },
-    { day: "Thu", checkedIn: true },
-    { day: "Fri", checkedIn: false },
-    { day: "Sat", checkedIn: false },
-    { day: "Sun", checkedIn: false },
-  ];
-
-  // Study paths
-  const studyPaths = [
-    {
-      label: "Backend Study Path",
-      id: "#F0F8FF",
-    },
-    {
-      label: "Frontend Study Path",
-      id: "#FAEBD7",
-    },
-    {
-      label: "System design interview",
-      id: "#00FFFF",
-    },
-  ];
-
-  const [studyPath, setStudyPath] = React.useState([studyPaths[0]]);
-
-  // In your component
   const handleTileClick = (moduleId: number) => {
     router.push(`/home/moduleinfo`);
   };
@@ -205,12 +147,6 @@ export default function Page() {
         subHeading="3 Modules to go!"
         maxLines={1}
         endEnhancer={() => (
-          // <StarRating
-          //   numItems={5}
-          //   onChange={(data) => setValue(data.value)}
-          //   size={22}
-          //   value={value}
-          // />
           <Button
             size={SIZE.compact}
             kind={KIND.secondary}
@@ -221,9 +157,10 @@ export default function Page() {
         )}
       />
 
-      <div className="pl-3 pr-3">
+      <div className="pl-3 pr-3 pt-3">
         <StyledDivider />
         <div
+          className="pt-6"
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -262,10 +199,11 @@ export default function Page() {
           <Select
             clearable={false}
             options={studyPaths || []}
-            value={studyPath || []}
+            value={currentStudyPath || []}
             placeholder="Select Study Path"
-            onChange={(params) => setStudyPath(params.value as any)}
+            onChange={(params) => handleSwitchStudyPath(params.value as any)}
             searchable={false}
+            isLoading={isLoading}
             overrides={{
               Input: {
                 props: {
