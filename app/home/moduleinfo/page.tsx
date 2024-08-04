@@ -14,6 +14,7 @@ import { ProgressBar } from "baseui/progress-bar";
 import { Tag, KIND as TAGKIND } from "baseui/tag";
 import { Theme } from "baseui/theme";
 import { StyleObject } from "styletron-react";
+import { withAuth } from "app/hoc/withAuth";
 
 interface Subtopic {
   title: string;
@@ -131,7 +132,7 @@ const SubtopicLink = styled<"a", SubtopicLinkProps>(
   }
 );
 
-export default function Page() {
+function Page() {
   const params = useParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -271,3 +272,5 @@ export default function Page() {
     </HomeContainer>
   );
 }
+
+export default withAuth(Page);

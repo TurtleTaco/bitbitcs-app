@@ -1,12 +1,32 @@
 // app/utils/api.ts
 
 import axios from 'axios';
+import { getAuth } from 'firebase/auth';
 
 import { RiShieldKeyholeLine, RiDatabase2Line, RiFlowChart, RiLockLine, RiAlarmWarningLine, RiPercentLine } from "react-icons/ri";
 
 
 const API_BASE_URL = 'https://your-api-base-url.com';
-const API_TOKEN = 'your-api-token';
+// const API_TOKEN = 'your-api-token';
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
+api.interceptors.request.use(async (config) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (user) {
+    const token = await user.getIdToken();
+    console.log('Token:', token);
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+
 
 // Toggle between local and online mode
 const USE_LOCAL_DATA = true;
@@ -130,7 +150,7 @@ const localStudyPaths: StudyPath[] = [
   },
 ];
 
-export const fetchDailyCheckIns = async (email: string): Promise<DailyCheckIn[]> => {
+export const fetchDailyCheckIns = async (): Promise<DailyCheckIn[]> => {
   if (USE_LOCAL_DATA) {
     function randomizeCheckIns(checkIns: DailyCheckIn[]): DailyCheckIn[] {
       return checkIns.map(checkIn => ({
@@ -145,10 +165,7 @@ export const fetchDailyCheckIns = async (email: string): Promise<DailyCheckIn[]>
   }
 
   try {
-    const response = await axios.get(`${API_BASE_URL}/daily-check-ins`, {
-      params: { email },
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
-    });
+    const response = await api.get('/daily-check-ins');
     return response.data;
   } catch (error) {
     console.error('Error fetching daily check-ins:', error);
@@ -156,16 +173,21 @@ export const fetchDailyCheckIns = async (email: string): Promise<DailyCheckIn[]>
   }
 };
 
-export const fetchStudyPaths = async (email: string): Promise<StudyPath[]> => {
+export const fetchStudyPaths = async (): Promise<StudyPath[]> => {
   if (USE_LOCAL_DATA) {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user) {
+      const token = await user.getIdToken();
+      console.log('Token:', token);
+    }
+
     await new Promise(resolve => setTimeout(resolve, SIMULATED_DELAY));
     return localStudyPaths;
   }
 
   try {
-    const response = await axios.get(`${API_BASE_URL}/study-paths`, {
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
-    });
+    const response = await api.get('/study-paths');
     return response.data;
   } catch (error) {
     console.error('Error fetching study paths:', error);
@@ -173,22 +195,15 @@ export const fetchStudyPaths = async (email: string): Promise<StudyPath[]> => {
   }
 }
 
-export const fetchStudyPathModules = async (email: string, studypath_id: string): Promise<Module[]> => {
+export const fetchStudyPathModules = async (studypath_id: string): Promise<Module[]> => {
   if (USE_LOCAL_DATA) {
     function createRandomSublist<T>(localModules: T[]): T[] {
-      // Create a copy of the original array to avoid modifying it
       const shuffled = [...localModules];
-
-      // Shuffle the array
       for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
-
-      // Generate a random sublist size between 1 and the length of the array
       const sublistSize = Math.floor(Math.random() * localModules.length) + 1;
-
-      // Return the first 'sublistSize' elements
       return shuffled.slice(0, sublistSize);
     }
 
@@ -198,9 +213,8 @@ export const fetchStudyPathModules = async (email: string, studypath_id: string)
   }
 
   try {
-    const response = await axios.get(`${API_BASE_URL}/modules`, {
-      params: { email },
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
+    const response = await api.get('/modules', {
+      params: { studypath_id }
     });
     return response.data;
   } catch (error) {

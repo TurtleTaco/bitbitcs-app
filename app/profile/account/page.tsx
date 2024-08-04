@@ -16,6 +16,7 @@ import { Alert } from "baseui/icon";
 import { validate as validateEmail } from "email-validator"; // add this package to your repo: `$ pnpm add email-validator`
 import { Checkbox, STYLE_TYPE, LABEL_PLACEMENT } from "baseui/checkbox";
 import { handleBackNavigation } from "app/lib/navigation";
+import { withAuth } from "app/hoc/withAuth";
 
 // react icon
 import { MdKeyboardArrowLeft } from "react-icons/md";
@@ -36,7 +37,7 @@ function Negative() {
   );
 }
 
-export default function Page() {
+function Page() {
   const userName = "Lin Sun";
 
   const router = useRouter();
@@ -111,3 +112,5 @@ export default function Page() {
     </div>
   );
 }
+
+export default withAuth(Page);

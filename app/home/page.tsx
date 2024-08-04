@@ -31,26 +31,28 @@ import {
   DailyCheckIn,
   Module,
   StudyPath,
-} from "../utils/api";
+} from "app/utils/api";
+import { useAuth } from "app/context/AuthContext";
+import { withAuth } from "app/hoc/withAuth";
 
 const HomeContainer = styled("div", {
   padding: "10px",
 });
 
-export default function Page() {
+function Page() {
   const router = useRouter();
   const [value, setValue] = React.useState(4);
 
   const [css] = useStyletron();
   const pathname = usePathname();
 
+  const { user, loading, displayName, email, token } = useAuth();
+
   const selectOverride = css({
     "ul li::before": {
       content: "none !important",
     },
   });
-
-  const email = "zac@gmail.com";
 
   const iconColors = [
     "#166c3b", // Green
@@ -78,27 +80,24 @@ export default function Page() {
   >([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const fetchModules = React.useCallback(
-    async (email: string, studyPath: string) => {
-      try {
-        setIsLoading(true);
-        const modulesData = await fetchStudyPathModules(email, studyPath);
-        setModules(modulesData);
-      } catch (error) {
-        console.error("Error fetching modules:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    []
-  );
+  const fetchModules = React.useCallback(async (studyPath: string) => {
+    try {
+      setIsLoading(true);
+      const modulesData = await fetchStudyPathModules(studyPath);
+      setModules(modulesData);
+    } catch (error) {
+      console.error("Error fetching modules:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
         const [checkIns, studyPathsData] = await Promise.all([
-          fetchDailyCheckIns(email),
-          fetchStudyPaths(email),
+          fetchDailyCheckIns(),
+          fetchStudyPaths(),
         ]);
 
         setDailyCheckIns(checkIns);
@@ -107,7 +106,7 @@ export default function Page() {
         if (studyPathsData.length > 0) {
           const firstStudyPath = studyPathsData[0];
           setCurrentStudyPath([firstStudyPath]);
-          await fetchModules(email, firstStudyPath.id); // Assuming StudyPath has an 'id' property
+          await fetchModules(firstStudyPath.id); // Assuming StudyPath has an 'id' property
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -121,7 +120,7 @@ export default function Page() {
     setCurrentStudyPath(studyPath);
     setIsLoading(true);
     console.log("Switching to study path:", studyPath);
-    await fetchModules(email, studyPath[0].id);
+    await fetchModules(studyPath[0].id);
     setIsLoading(false);
   };
 
@@ -143,7 +142,7 @@ export default function Page() {
   return (
     <HomeContainer className="p-4">
       <ListHeading
-        heading="Hello, Lin!"
+        heading={`Hello, ${user?.displayName || ""}!`}
         subHeading="3 Modules to go!"
         maxLines={1}
         endEnhancer={() => (
@@ -269,3 +268,5 @@ export default function Page() {
     </HomeContainer>
   );
 }
+
+export default withAuth(Page);

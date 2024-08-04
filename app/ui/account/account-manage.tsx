@@ -5,99 +5,120 @@ import { useRouter } from "next/navigation";
 
 import { ListItem, ListItemLabel, ARTWORK_SIZES } from "baseui/list";
 import { ListHeading } from "baseui/list";
-import { Button, KIND, SIZE } from "baseui/button";
-import Link from "next/link";
 
-// react icon
-import { MdManageAccounts } from "react-icons/md";
-import { MdLogout } from "react-icons/md";
-import { MdHelpCenter } from "react-icons/md";
-import { MdFeedback } from "react-icons/md";
-import { MdPolicy } from "react-icons/md";
-import { MdPrivacyTip } from "react-icons/md";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import {
+  MdManageAccounts,
+  MdLogout,
+  MdLogin,
+  MdHelpCenter,
+  MdFeedback,
+  MdPolicy,
+  MdPrivacyTip,
+  MdKeyboardArrowRight,
+} from "react-icons/md";
 import { styled } from "styletron-react";
+
+import { useAuth } from "../../context/AuthContext";
+import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
+import { getAuth, signOut as firebaseSignOut } from "firebase/auth";
 
 const ProfileContainer = styled("div", {
   padding: "10px",
 });
 
+const ClickableListItem = styled(ListItem, {
+  cursor: "pointer",
+  ":hover": {
+    backgroundColor: "rgba(0, 0, 0, 0.05)",
+  },
+});
+
+const ArrowIcon = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "24px",
+  height: "24px",
+});
+
+const LogoutLabel = styled("span", {
+  color: "#E11900",
+});
+
+const LoginLabel = styled("span", {
+  color: "#166c3b",
+});
+
 export default function AccountManage() {
   const router = useRouter();
+  const { user } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await FirebaseAuthentication.signOut();
+      const auth = getAuth();
+      await firebaseSignOut(auth);
+      router.push("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  const handleLogin = () => {
+    router.push("/");
+  };
+
+  const renderListItem = (
+    icon: React.ReactNode,
+    label: string,
+    onClick: () => void,
+    isAuthAction: boolean = false
+  ) => (
+    <ClickableListItem
+      artwork={() => icon}
+      artworkSize={ARTWORK_SIZES.LARGE}
+      endEnhancer={() => (
+        <ArrowIcon>
+          <MdKeyboardArrowRight />
+        </ArrowIcon>
+      )}
+      onClick={onClick}
+    >
+      <ListItemLabel>
+        {isAuthAction ? (
+          user ? (
+            <LogoutLabel>{label}</LogoutLabel>
+          ) : (
+            <LoginLabel>{label}</LoginLabel>
+          )
+        ) : (
+          label
+        )}
+      </ListItemLabel>
+    </ClickableListItem>
+  );
 
   return (
     <ProfileContainer>
       <ListHeading heading="Account" maxLines={1} />
-      <ListItem
-        artwork={(props) => <MdManageAccounts />}
-        artworkSize={ARTWORK_SIZES.LARGE}
-        endEnhancer={() => (
-          <Link href="/profile/account" passHref>
-            <Button size={SIZE.compact} kind={KIND.tertiary}>
-              <MdKeyboardArrowRight />
-            </Button>
-          </Link>
+      {user &&
+        renderListItem(<MdManageAccounts />, "Manage Account", () =>
+          router.push("/profile/account")
         )}
-      >
-        <ListItemLabel>Manage Account</ListItemLabel>
-      </ListItem>
-      <ListItem
-        artwork={(props) => <MdLogout />}
-        artworkSize={ARTWORK_SIZES.LARGE}
-        endEnhancer={() => (
-          <Button size={SIZE.compact} kind={KIND.tertiary}>
-            <MdKeyboardArrowRight />
-          </Button>
-        )}
-      >
-        <ListItemLabel>Log out</ListItemLabel>
-      </ListItem>
+      {renderListItem(
+        user ? <MdLogout /> : <MdLogin />,
+        user ? "Log out" : "Log in",
+        user ? handleLogout : handleLogin,
+        true
+      )}
+
       <ListHeading heading="Support" maxLines={1} />
-      <ListItem
-        artwork={(props) => <MdHelpCenter />}
-        artworkSize={ARTWORK_SIZES.LARGE}
-        endEnhancer={() => (
-          <Button size={SIZE.compact} kind={KIND.tertiary}>
-            <MdKeyboardArrowRight />
-          </Button>
-        )}
-      >
-        <ListItemLabel>Help center</ListItemLabel>
-      </ListItem>
-      <ListItem
-        artwork={(props) => <MdFeedback />}
-        artworkSize={ARTWORK_SIZES.LARGE}
-        endEnhancer={() => (
-          <Button size={SIZE.compact} kind={KIND.tertiary}>
-            <MdKeyboardArrowRight />
-          </Button>
-        )}
-      >
-        <ListItemLabel>Content Feedback</ListItemLabel>
-      </ListItem>
+      {renderListItem(<MdHelpCenter />, "Help center", () => {})}
+      {renderListItem(<MdFeedback />, "Content Feedback", () => {})}
+
       <ListHeading heading="Terms" maxLines={1} />
-      <ListItem
-        artwork={(props) => <MdPolicy />}
-        artworkSize={ARTWORK_SIZES.LARGE}
-        endEnhancer={() => (
-          <Button size={SIZE.compact} kind={KIND.tertiary}>
-            <MdKeyboardArrowRight />
-          </Button>
-        )}
-      >
-        <ListItemLabel>Terms of use</ListItemLabel>
-      </ListItem>
-      <ListItem
-        artwork={(props) => <MdPrivacyTip />}
-        artworkSize={ARTWORK_SIZES.LARGE}
-        endEnhancer={() => (
-          <Button size={SIZE.compact} kind={KIND.tertiary}>
-            <MdKeyboardArrowRight />
-          </Button>
-        )}
-      >
-        <ListItemLabel>Privacy Policy</ListItemLabel>
-      </ListItem>
+      {renderListItem(<MdPolicy />, "Terms of use", () => {})}
+      {renderListItem(<MdPrivacyTip />, "Privacy Policy", () => {})}
     </ProfileContainer>
   );
 }

@@ -26,12 +26,13 @@ import {
   RiSearchLine,
   RiArrowRightSLine,
 } from "react-icons/ri";
+import { withAuth } from "app/hoc/withAuth";
 
 const SearchContainer = styled("div", {
   padding: "10px",
 });
 
-export default function Page() {
+function Page() {
   const router = useRouter();
   const [css, theme] = useStyletron();
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -191,3 +192,5 @@ export default function Page() {
     </SearchContainer>
   );
 }
+
+export default withAuth(Page);

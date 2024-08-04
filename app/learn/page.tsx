@@ -9,12 +9,13 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import { ProgressBar } from "baseui/progress-bar";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import styles from "app/ui/html_content.module.css";
+import { withAuth } from "app/hoc/withAuth";
 
 const LearnContainer = styled("div", {
   padding: "10px",
 });
 
-export default function Page() {
+function Page() {
   const router = useRouter();
   const [htmlContent, setHtmlContent] = useState([]);
   const [currentSnippet, setCurrentSnippet] = useState(0);
@@ -130,3 +131,5 @@ export default function Page() {
     </LearnContainer>
   );
 }
+
+export default withAuth(Page);
