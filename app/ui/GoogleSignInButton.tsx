@@ -7,16 +7,15 @@ import {
 } from "firebase/auth";
 import { initializeFirebaseAuth } from "app/firebase/firebaseConfig";
 import { useAuth } from "app/context/AuthContext";
+import { Button, SIZE, SHAPE, KIND } from "baseui/button";
+import { FcGoogle } from "react-icons/fc";
 
 const GoogleSignInButton: React.FC = () => {
   const { user } = useAuth();
 
   const signInWithGoogle = async () => {
     try {
-      // Create credentials on the native layer
       const result = await FirebaseAuthentication.signInWithGoogle();
-
-      // Sign in on the web layer using the id token
       if (result.credential?.idToken) {
         const auth = await initializeFirebaseAuth();
         const credential = GoogleAuthProvider.credential(
@@ -33,9 +32,7 @@ const GoogleSignInButton: React.FC = () => {
 
   const signOut = async () => {
     try {
-      // Sign out on the native layer
       await FirebaseAuthentication.signOut();
-      // Sign out on the web layer
       const auth = await initializeFirebaseAuth();
       await firebaseSignOut(auth);
     } catch (error) {
@@ -44,9 +41,23 @@ const GoogleSignInButton: React.FC = () => {
   };
 
   return (
-    <button onClick={user ? signOut : signInWithGoogle}>
-      {user ? "Sign out" : "Sign in with Google"}
-    </button>
+    <Button
+      onClick={user ? signOut : signInWithGoogle}
+      startEnhancer={() => <FcGoogle size={20} />}
+      size={SIZE.default}
+      shape={SHAPE.default}
+      kind={KIND.secondary}
+      overrides={{
+        BaseButton: {
+          style: {
+            width: "100%",
+            marginBottom: "1rem",
+          },
+        },
+      }}
+    >
+      {user ? "Sign out" : "Continue with Google"}
+    </Button>
   );
 };
 

@@ -22,7 +22,10 @@ export default function RootLayout({
           <BaseProvider theme={LightTheme}>
             <AuthProvider>
               <div className="mx-auto w-screen h-screen flex flex-col shadow-lg rounded-xl overflow-hidden">
-                <main className="flex-1 overflow-y-auto">{children}</main>
+                {/* <main className="flex-1 overflow-y-auto">{children}</main> */}
+                <main className="flex-1 overflow-y-auto flex flex-col">
+                  {children}
+                </main>
                 <div className="flex-shrink-0">
                   <BottomNav />
                 </div>
