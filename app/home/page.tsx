@@ -142,7 +142,9 @@ function Page() {
   return (
     <HomeContainer className="p-4">
       <ListHeading
-        heading={`Hello, ${user?.displayName || ""}!`}
+        heading={`Hello, ${
+          user?.displayName || user?.email?.split("@")[0] || ""
+        }!`}
         subHeading="3 Modules to go!"
         maxLines={1}
         endEnhancer={() => (

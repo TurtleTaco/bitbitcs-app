@@ -8,8 +8,9 @@ import { Input } from "baseui/input";
 import { FormControl } from "baseui/form-control";
 import { StyledLink } from "baseui/link";
 import { StyledDivider, SIZE } from "baseui/divider";
-import GoogleSignInButton from "app/ui/GoogleSignInButton";
+import GoogleSignInButton from "app/ui/auth/GoogleSignInButton";
 import { useAuth } from "app/context/AuthContext";
+import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
 
 export default function LoginPage() {
   const [css, theme] = useStyletron();
@@ -21,6 +22,21 @@ export default function LoginPage() {
   const [password, setPassword] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
+
+  React.useEffect(() => {
+    const checkCurrentUser = async () => {
+      try {
+        const result = await FirebaseAuthentication.getCurrentUser();
+        if (result.user) {
+          router.push("/home");
+        }
+      } catch (error) {
+        console.error("Error checking current user:", error);
+      }
+    };
+
+    checkCurrentUser();
+  }, [router]);
 
   React.useEffect(() => {
     if (user && !loading) {
@@ -44,6 +60,49 @@ export default function LoginPage() {
   const isLoginFormValid = email && password && isValidEmail(email);
   const isSignUpFormValid =
     email && password && firstName && lastName && isValidEmail(email);
+
+  const handleSignUp = async () => {
+    try {
+      const result =
+        await FirebaseAuthentication.createUserWithEmailAndPassword({
+          email,
+          password,
+        });
+      console.log("User created:", result.user);
+      // You can add additional logic here, such as updating the user profile with first and last name
+      router.push("/home");
+    } catch (error) {
+      console.error("Error signing up:", error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      const result = await FirebaseAuthentication.signInWithEmailAndPassword({
+        email,
+        password,
+      });
+      console.log("User logged in:", result.user);
+      router.push("/home");
+    } catch (error) {
+      console.error("Error logging in:", error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    try {
+      await FirebaseAuthentication.sendPasswordResetEmail({
+        email,
+      });
+      console.log("Password reset email sent");
+      // Show success message to user
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
 
   return (
     <div className="flex-1 flex items-center justify-center">
@@ -105,9 +164,7 @@ export default function LoginPage() {
                 </FormControl>
                 <Button
                   disabled={!isLoginFormValid}
-                  onClick={() => {
-                    /* Implement login logic */
-                  }}
+                  onClick={handleLogin}
                   overrides={{
                     BaseButton: {
                       style: {
@@ -120,7 +177,11 @@ export default function LoginPage() {
                 >
                   Log in
                 </Button>
-                <StyledLink href="#" className={css({ alignSelf: "center" })}>
+                <StyledLink
+                  href="#"
+                  onClick={handleForgotPassword}
+                  className={css({ alignSelf: "center" })}
+                >
                   Forgot password?
                 </StyledLink>
               </>
@@ -177,9 +238,7 @@ export default function LoginPage() {
             </FormControl>
             <Button
               disabled={!isSignUpFormValid}
-              onClick={() => {
-                /* Implement sign up logic */
-              }}
+              onClick={handleSignUp}
               overrides={{
                 BaseButton: {
                   style: {
