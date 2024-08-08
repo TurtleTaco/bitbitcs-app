@@ -10,6 +10,9 @@ import { styletron } from "@/app/styletron"; // Adjust this import path as neede
 import BottomNav from "./ui/bottom-nav";
 import { AuthProvider } from "./context/AuthContext";
 
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "app/utils/api";
+
 export default function RootLayout({
   children,
 }: {
@@ -21,15 +24,17 @@ export default function RootLayout({
         <StyletronProvider value={styletron}>
           <BaseProvider theme={LightTheme}>
             <AuthProvider>
-              <div className="mx-auto w-screen h-screen flex flex-col shadow-lg rounded-xl overflow-hidden">
-                {/* <main className="flex-1 overflow-y-auto">{children}</main> */}
-                <main className="flex-1 overflow-y-auto flex flex-col">
-                  {children}
-                </main>
-                <div className="flex-shrink-0">
-                  <BottomNav />
+              <QueryClientProvider client={queryClient}>
+                <div className="mx-auto w-screen h-screen flex flex-col shadow-lg rounded-xl overflow-hidden">
+                  {/* <main className="flex-1 overflow-y-auto">{children}</main> */}
+                  <main className="flex-1 overflow-y-auto flex flex-col">
+                    {children}
+                  </main>
+                  <div className="flex-shrink-0">
+                    <BottomNav />
+                  </div>
                 </div>
-              </div>
+              </QueryClientProvider>
             </AuthProvider>
           </BaseProvider>
         </StyletronProvider>
