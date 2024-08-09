@@ -212,7 +212,35 @@ export interface StudyGoalSubtopic {
   status: 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED'; // Add other possible statuses if needed
 }
 
+// Study plan interfaces
+export interface StudyPlanResponse {
+  study_plans: StudyPlan[];
+}
 
+export interface StudyPlan {
+  id: string;
+  title: string;
+  user_id: string;
+  study_plan_chapters: StudyPlanChapter[];
+}
+
+export interface StudyPlanChapter {
+  module_name: string;
+  chapter_name: string;
+  discussion_points: StudyPlanDiscussionPoint[];
+}
+
+export interface StudyPlanDiscussionPoint {
+  title: string;
+  subtopics: StudyPlanSubtopic[];
+}
+
+export interface StudyPlanSubtopic {
+  title: string;
+  status: StudyPlanSubtopicStatus;
+}
+
+export type StudyPlanSubtopicStatus = "NOT_STARTED" | string; // Add other possible status values if known
 
 // React Query hooks
 
@@ -239,10 +267,10 @@ export const useCreateStudyPlan = () => {
 };
 
 export const useGetStudyPlan = () => {
-  return useQuery({
+  return useQuery<StudyPlanResponse>({
     queryKey: ['studyPlan'],
     queryFn: async () => {
-      const response = await api.get('/study-plans');
+      const response = await api.get<StudyPlanResponse>('/study-plans');
       return response.data;
     },
   });

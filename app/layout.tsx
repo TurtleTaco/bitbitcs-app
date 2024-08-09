@@ -1,17 +1,8 @@
-"use client";
-
 import React from "react";
 import "@/app/ui/global.css";
 import { inter } from "@/app/ui/fonts";
-import { Provider as StyletronProvider } from "styletron-react";
-import { LightTheme, BaseProvider } from "baseui";
-import { styletron } from "@/app/styletron"; // Adjust this import path as needed
-
 import BottomNav from "./ui/bottom-nav";
-import { AuthProvider } from "./context/AuthContext";
-
-import { QueryClientProvider } from "react-query";
-import { queryClient } from "app/utils/api";
+import { Providers } from "./providers";
 
 export default function RootLayout({
   children,
@@ -21,23 +12,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <StyletronProvider value={styletron}>
-          <BaseProvider theme={LightTheme}>
-            <AuthProvider>
-              <QueryClientProvider client={queryClient}>
-                <div className="mx-auto w-screen h-screen flex flex-col shadow-lg rounded-xl overflow-hidden">
-                  {/* <main className="flex-1 overflow-y-auto">{children}</main> */}
-                  <main className="flex-1 overflow-y-auto flex flex-col">
-                    {children}
-                  </main>
-                  <div className="flex-shrink-0">
-                    <BottomNav />
-                  </div>
-                </div>
-              </QueryClientProvider>
-            </AuthProvider>
-          </BaseProvider>
-        </StyletronProvider>
+        <Providers>
+          <div className="mx-auto w-screen h-screen flex flex-col shadow-lg rounded-xl overflow-hidden">
+            <main className="flex-1 overflow-y-auto flex flex-col">
+              {children}
+            </main>
+            <div className="flex-shrink-0">
+              <BottomNav />
+            </div>
+          </div>
+        </Providers>
       </body>
     </html>
   );

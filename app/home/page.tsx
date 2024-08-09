@@ -1,18 +1,16 @@
+// app/home/page.tsx
 "use client";
 
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
-
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { ListHeading } from "baseui/list";
 import { Button, KIND, SIZE } from "baseui/button";
 import { useStyletron } from "baseui";
-import { MdKeyboardArrowLeft, MdOutlineDiamond } from "react-icons/md";
+import { MdOutlineDiamond } from "react-icons/md";
 import { styled } from "styletron-react";
 import { StyledDivider } from "baseui/divider";
-import { StarRating } from "baseui/rating";
 import { Tile, TILE_KIND, ALIGNMENT, StyledParagraph } from "baseui/tile";
-import { Search, ChevronRight } from "baseui/icon";
+import { ChevronRight } from "baseui/icon";
 import {
   RiShieldKeyholeLine,
   RiDatabase2Line,
@@ -21,19 +19,20 @@ import {
   RiAlarmWarningLine,
   RiPercentLine,
 } from "react-icons/ri";
-import { Select } from "baseui/select";
-import { handleBackNavigation } from "app/lib/navigation";
 import { FaBoltLightning } from "react-icons/fa6";
-import {
-  fetchDailyCheckIns,
-  fetchStudyPaths,
-  fetchStudyPathModules,
-  DailyCheckIn,
-  Module,
-  StudyPath,
-} from "app/utils/api";
 import { useAuth } from "app/context/AuthContext";
 import { withAuth } from "app/hoc/withAuth";
+import {
+  useGetStudyPlan,
+  useCourseOutline,
+  useDailyCheckIns,
+  FieldModule,
+} from "app/utils/api";
+import { Skeleton } from "baseui/skeleton";
+import { Tag, HIERARCHY } from "baseui/tag";
+import { Select, Value } from "baseui/select";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { ProgressBar } from "baseui/progress-bar";
 
 const HomeContainer = styled("div", {
   padding: "10px",
@@ -41,103 +40,155 @@ const HomeContainer = styled("div", {
 
 function Page() {
   const router = useRouter();
-  const [value, setValue] = React.useState(4);
-
   const [css] = useStyletron();
-  const pathname = usePathname();
+  const { user } = useAuth();
 
-  const { user, loading, displayName, email, token } = useAuth();
-
-  const selectOverride = css({
-    "ul li::before": {
-      content: "none !important",
-    },
-  });
+  const { data: studyPlanData, isLoading: isStudyPlanLoading } =
+    useGetStudyPlan();
+  const { data: courseOutline, isLoading: isCourseOutlineLoading } =
+    useCourseOutline();
+  const { data: dailyCheckIns, isLoading: isDailyCheckInsLoading } =
+    useDailyCheckIns();
 
   const iconColors = [
-    "#166c3b", // Green
-    "#276ef1", // Blue
-    "#9747FF", // Purple
-    "#7356BF", // Indigo
-    "#EA6B16", // Orange
-    "#E11900", // Red
-    "#1E54B7", // Dark Blue
-    "#5F6B7C", // Gray
-    "#05944F", // Bright Green
-    "#C63A38", // Dark Red
-    "#F4C61F", // Yellow
-    "#2089B5", // Teal
-    "#A872B9", // Lavender
-    "#FF6154", // Coral
-    "#454545", // Charcoal
+    "#166c3b",
+    "#276ef1",
+    "#9747FF",
+    "#7356BF",
+    "#EA6B16",
+    "#E11900",
+    "#1E54B7",
+    "#5F6B7C",
+    "#05944F",
+    "#C63A38",
+    "#F4C61F",
+    "#2089B5",
+    "#A872B9",
+    "#FF6154",
+    "#454545",
   ];
 
-  const [dailyCheckIns, setDailyCheckIns] = React.useState<DailyCheckIn[]>([]);
-  const [modules, setModules] = React.useState<Module[]>([]);
-  const [studyPaths, setStudyPaths] = React.useState<StudyPath[]>([]);
-  const [currentStudyPath, setCurrentStudyPath] = React.useState<
-    [StudyPath] | []
-  >([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const icons = [
+    RiShieldKeyholeLine,
+    RiDatabase2Line,
+    RiFlowChart,
+    RiLockLine,
+    RiAlarmWarningLine,
+    RiPercentLine,
+  ];
 
-  const fetchModules = React.useCallback(async (studyPath: string) => {
-    try {
-      setIsLoading(true);
-      const modulesData = await fetchStudyPathModules(studyPath);
-      setModules(modulesData);
-    } catch (error) {
-      console.error("Error fetching modules:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [checkIns, studyPathsData] = await Promise.all([
-          fetchDailyCheckIns(),
-          fetchStudyPaths(),
-        ]);
-
-        setDailyCheckIns(checkIns);
-        setStudyPaths(studyPathsData);
-
-        if (studyPathsData.length > 0) {
-          const firstStudyPath = studyPathsData[0];
-          setCurrentStudyPath([firstStudyPath]);
-          await fetchModules(firstStudyPath.id); // Assuming StudyPath has an 'id' property
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [fetchModules]);
-
-  const handleSwitchStudyPath = async (studyPath: [StudyPath]) => {
-    setCurrentStudyPath(studyPath);
-    setIsLoading(true);
-    console.log("Switching to study path:", studyPath);
-    await fetchModules(studyPath[0].id);
-    setIsLoading(false);
-  };
-
-  const handleTileClick = (moduleId: number) => {
-    router.push(`/home/moduleinfo`);
-  };
-
-  // First, let's define a simple hash function
-  const hashString = (str: String) => {
+  const hashString = (str: string) => {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
       hash = (hash << 5) - hash + char;
-      hash = hash & hash; // Convert to 32-bit integer
+      hash = hash & hash;
     }
     return Math.abs(hash);
   };
+
+  const getUniqueModules = () => {
+    if (!studyPlanData) return [];
+    const moduleSet = new Set<string>();
+    studyPlanData.study_plans.forEach((plan) => {
+      plan.study_plan_chapters.forEach((chapter) => {
+        moduleSet.add(chapter.module_name);
+      });
+    });
+    return Array.from(moduleSet);
+  };
+
+  const getModuleInfo = (moduleName: string) => {
+    if (!courseOutline) return null;
+    for (const field of courseOutline.course_outline.fields) {
+      const module = field.modules.find((m) => m.title === moduleName);
+      if (module) return { module, fieldName: field.title };
+    }
+    return null;
+  };
+
+  const uniqueModules = getUniqueModules();
+  const moduleInfos = uniqueModules
+    .map((moduleName) => getModuleInfo(moduleName))
+    .filter(Boolean);
+
+  const handleModuleSelect = (fieldName: string, module: FieldModule) => {
+    router.push(
+      `/moduleinfo?field_name=${encodeURIComponent(
+        String(fieldName)
+      )}&module_name=${encodeURIComponent(module.title)}&module_view=true`
+    );
+  };
+
+  const getDifficultyTag = (categorization: string) => {
+    switch (categorization) {
+      case "fundamental":
+        return (
+          <Tag
+            closeable={false}
+            hierarchy={HIERARCHY.secondary}
+            kind="positive"
+            overrides={{
+              Root: {
+                style: {
+                  margin: "0",
+                  // padding: "0",
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                },
+              },
+            }}
+          >
+            Fundamental
+          </Tag>
+        );
+      case "comprehensive":
+        return (
+          <Tag
+            closeable={false}
+            hierarchy={HIERARCHY.secondary}
+            kind="warning"
+            overrides={{
+              Root: {
+                style: {
+                  margin: "0",
+                  // padding: "0",
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                },
+              },
+            }}
+          >
+            Intermediate
+          </Tag>
+        );
+      case "extensive":
+        return (
+          <Tag
+            closeable={false}
+            hierarchy={HIERARCHY.secondary}
+            kind="negative"
+            overrides={{
+              Root: {
+                style: {
+                  margin: "0",
+                  // padding: "0",
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                },
+              },
+            }}
+          >
+            Advanced
+          </Tag>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const isLoading =
+    isStudyPlanLoading || isCourseOutlineLoading || isDailyCheckInsLoading;
 
   return (
     <HomeContainer className="p-4">
@@ -145,14 +196,10 @@ function Page() {
         heading={`Hello, ${
           user?.displayName || user?.email?.split("@")[0] || ""
         }!`}
-        subHeading="3 Modules to go!"
+        subHeading="Finish a topic to start a streak"
         maxLines={1}
         endEnhancer={() => (
-          <Button
-            size={SIZE.compact}
-            kind={KIND.secondary}
-            // onClick={() => handleBackNavigation(router, pathname)}
-          >
+          <Button size={SIZE.compact} kind={KIND.secondary}>
             <MdOutlineDiamond style={{ color: "#F4C61F" }} />
           </Button>
         )}
@@ -169,7 +216,7 @@ function Page() {
             width: "100%",
           }}
         >
-          {dailyCheckIns.map((checkIn, index) => (
+          {dailyCheckIns?.map((checkIn, index) => (
             <div key={index} style={{ flex: "1", textAlign: "center" }}>
               <Button
                 size={SIZE.compact}
@@ -184,89 +231,179 @@ function Page() {
               >
                 <FaBoltLightning style={{ color: "#F4C61F" }} />
               </Button>
+              <div style={{ marginTop: "8px", fontSize: "12px" }}>
+                {["Mon", "Tue", "Wed", "Thu", "Fri"][index]}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <ListHeading
-        heading="Pick up where you left off"
-        // subHeading="3 Modules to go!"
-        maxLines={1}
-      />
-
-      <div className="p-3">
-        <div className={selectOverride}>
-          <Select
-            clearable={false}
-            options={studyPaths || []}
-            value={currentStudyPath || []}
-            placeholder="Select Study Path"
-            onChange={(params) => handleSwitchStudyPath(params.value as any)}
-            searchable={false}
-            isLoading={isLoading}
-            overrides={{
-              Input: {
-                props: {
-                  readOnly: true,
-                },
-              },
-            }}
-          />
-        </div>
+      <ListHeading heading="Personalized studies" maxLines={1} />
+      <div className="px-3">
         <div className="mt-4 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
-          {modules.map((module, index) => {
-            const colorIndex = hashString(module.title) % iconColors.length;
-
-            return (
-              <div key={module.id} className="w-full">
-                <Tile
-                  label={module.title}
-                  leadingContent={() => (
-                    <module.icon
-                      size={36}
-                      style={{ color: iconColors[colorIndex] }}
-                    />
-                  )}
-                  trailingContent={() => <ChevronRight size={36} />}
-                  headerAlignment={ALIGNMENT.left}
-                  bodyAlignment={ALIGNMENT.left}
-                  onClick={() => handleTileClick(module.id)}
-                  tileKind={TILE_KIND.action}
-                  overrides={{
-                    Root: {
-                      style: {
-                        height: "100%",
-                        width: "100%",
-                      },
-                    },
-                    Label: {
-                      style: {
-                        textAlign: "left",
-                        wordBreak: "break-word",
-                        overflowWrap: "break-word",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                        lineHeight: "1.2em",
-                        height: "2.4em",
-                        minHeight: "2.4em",
-                      },
-                    },
-                  }}
-                >
-                  <StyledParagraph>
-                    {module.chapter_cnt} chapters
-                  </StyledParagraph>
-                </Tile>
-              </div>
-            );
-          })}
+          <div key={"placeholder-personalized-goal"} className="w-full">
+            <Tile
+              label="Cloud Architecture"
+              leadingContent={() => (
+                <div>
+                  <RiDatabase2Line size={36} style={{ color: iconColors[2] }} />
+                  <div className="pt-2">
+                    <Tag
+                      closeable={false}
+                      hierarchy={HIERARCHY.secondary}
+                      kind="negative"
+                      overrides={{
+                        Root: {
+                          style: {
+                            margin: "0",
+                            paddingLeft: "0",
+                            paddingRight: "0",
+                          },
+                        },
+                      }}
+                    >
+                      Personalized
+                    </Tag>
+                  </div>
+                </div>
+              )}
+              trailingContent={() => <ChevronRight size={36} />}
+              headerAlignment={ALIGNMENT.left}
+              bodyAlignment={ALIGNMENT.left}
+              onClick={() => console.log("Personalized goal clicked")}
+              tileKind={TILE_KIND.selection}
+              overrides={{
+                Root: {
+                  style: ({ $theme }) => ({
+                    height: "100%",
+                    width: "100%",
+                    outline: `${$theme.colors.primary300} solid`,
+                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                  }),
+                },
+                Label: {
+                  style: {
+                    textAlign: "left",
+                    wordBreak: "break-word",
+                    overflowWrap: "break-word",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    lineHeight: "1.2em",
+                    height: "2.4em",
+                    minHeight: "2.4em",
+                  },
+                },
+              }}
+            >
+              <StyledParagraph>4 chapters</StyledParagraph>
+              <ProgressBar value={80} />
+            </Tile>
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <Button
+              onClick={() => console.log("clicked add personalized goal")}
+              kind="secondary"
+              shape="circle"
+              size="large"
+              overrides={{
+                BaseButton: {
+                  style: {
+                    backgroundColor: "transparent",
+                  },
+                },
+              }}
+            >
+              <IoIosAddCircleOutline size={36} />
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 p-3"></div>
+      <ListHeading heading="Continue learning" maxLines={1} />
+
+      <div className="px-3">
+        <div className="mt-4 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
+          {isLoading
+            ? Array(6)
+                .fill(0)
+                .map((_, index) => (
+                  <Skeleton
+                    key={index}
+                    height="100px"
+                    width="100%"
+                    animation
+                    overrides={{
+                      Root: {
+                        style: {
+                          marginBottom: "10px",
+                          borderRadius: "8px",
+                        },
+                      },
+                    }}
+                  />
+                ))
+            : moduleInfos.map((moduleInfo, index) => {
+                if (!moduleInfo) return null;
+                const { module, fieldName } = moduleInfo;
+                const colorIndex = hashString(module.title) % iconColors.length;
+                const IconComponent = icons[index % icons.length];
+
+                return (
+                  <div key={module.title} className="w-full">
+                    <Tile
+                      label={module.title}
+                      leadingContent={() => (
+                        <div>
+                          <IconComponent
+                            size={36}
+                            style={{ color: iconColors[colorIndex] }}
+                          />
+                          <div className="pt-2">
+                            {getDifficultyTag(module.categorization)}
+                          </div>
+                        </div>
+                      )}
+                      trailingContent={() => <ChevronRight size={36} />}
+                      headerAlignment={ALIGNMENT.left}
+                      bodyAlignment={ALIGNMENT.left}
+                      onClick={() => handleModuleSelect(fieldName, module)}
+                      tileKind={TILE_KIND.action}
+                      overrides={{
+                        Root: {
+                          style: {
+                            height: "100%",
+                            width: "100%",
+                          },
+                        },
+                        Label: {
+                          style: {
+                            textAlign: "left",
+                            wordBreak: "break-word",
+                            overflowWrap: "break-word",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            lineHeight: "1.2em",
+                            height: "2.4em",
+                            minHeight: "2.4em",
+                          },
+                        },
+                      }}
+                    >
+                      <StyledParagraph>
+                        {module.chapters.length} chapters
+                      </StyledParagraph>
+                      <ProgressBar value={40} />
+                    </Tile>
+                  </div>
+                );
+              })}
+        </div>
+      </div>
     </HomeContainer>
   );
 }

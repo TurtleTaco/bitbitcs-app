@@ -1,3 +1,4 @@
+// app/search/page.tsx
 "use client";
 
 import * as React from "react";
@@ -245,6 +246,11 @@ function Page() {
               value={selectedField}
               placeholder="Select a field"
               isLoading={isLoading}
+              inputRef={(input) => {
+                if (input) {
+                  input.readOnly = true;
+                }
+              }}
             />
           </div>
         )}
